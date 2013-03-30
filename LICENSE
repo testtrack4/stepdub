@@ -1,3 +1,24 @@
+The StepDub application is copyright 2013 Stuart P. Bentley.
+
+I can't find a license that reflects these terms, so I'm just legally
+retaining copyright and specifying my personal terms of use for this code
+informally.
+
+I'm fine with anything you do with this code, as long as you don't upload it
+to the app store. Email me if you want specific permissions.
+
+--------------------------------------------------------------
+This app was initially based on phonegap-start from Github
+
+   https://github.com/phonegap/phonegap-start
+
+Apache license
+
+license available from:
+
+   https://github.com/phonegap/phonegap-start/blob/master/LICENSE
+
+-----------------------------
 
                                  Apache License
                            Version 2.0, January 2004
@@ -202,7 +223,7 @@
    limitations under the License.
 
 ==============================================================
-This product also include the following software:
+Other stuff that phonegap-start included
 ==============================================================
 
 --------------------------------------------------------------
