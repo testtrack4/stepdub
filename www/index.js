@@ -15,7 +15,7 @@ document.addEventListener('deviceready', function(){
   resetMags = function (){
     minmag = Math.Infinity;
     maxmag = 0;
-    playSound("140867__juskiddink__boing.wav");
+    playSound("sounds/140867__juskiddink__boing.wav");
   };
   
   resetMags();
