@@ -1,14 +1,16 @@
 var resetMags;
 
 document.addEventListener('deviceready', function(){
-  function playSound(filename){
-    var sound = new Media(filename);
-    sound.play();
-    sound.stop();
-    sound.release();
-  }
   function reportErr(err){
     navigator.notification.alert(err.message);
+  }
+  function playSound(filename){
+    try {
+      var sound = new Media(filename);
+      sound.play();
+      sound.stop();
+      sound.release();
+    } catch(err) {reportErr(err)};
   }
   var minmag = Math.Infinity, maxmag;
   
@@ -27,4 +29,8 @@ document.addEventListener('deviceready', function(){
       if(mag > maxmag){document.getElementById("mmin").textContent;
         maxmag = mag;}
     },reportErr,{frequency: 50});
+
+document.getElementById("appname") = 'reset stats';
 }, false);
+
+document.getElementById("appname") = 'script has run';
