@@ -12,10 +12,10 @@ document.addEventListener('deviceready', function(){
       sound.release();
     } catch(err) {reportErr(err)};
   }
-  var minmag = Math.Infinity, maxmag;
+  var minmag = Infinity, maxmag;
   
   resetMags = function (){
-    minmag = Math.Infinity;
+    minmag = Infinity;
     maxmag = 0;
     playSound("sounds/140867__juskiddink__boing.wav");
   };
