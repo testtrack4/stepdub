@@ -1,18 +1,21 @@
-var resetMags;
+/*global Media*/
+
+"use strict";
+
+var resetMags, lastErr;
 
 document.addEventListener('deviceready', function(){
   function reportErr(err){
+    lastErr = err;
     navigator.notification.alert(err.message);
   }
   function playSound(filename){
-    try {
-      var sound = new Media(filename);
-      sound.play();
-      sound.stop();
-      sound.release();
-    } catch(err) {reportErr(err)};
+    var sound = new Media(filename, undefined, reportErr);
+    sound.play();
+    sound.stop();
+    sound.release();
   }
-  var minmag = Infinity, maxmag;
+  var minmag, maxmag;
   
   resetMags = function (){
     minmag = Infinity;
@@ -30,7 +33,5 @@ document.addEventListener('deviceready', function(){
         document.getElementById("mmax").textContent = maxmag = mag;}
     },reportErr,{frequency: 50});
 
-document.getElementById("appname").textContent = 'reset stats';
+document.getElementById("appname").textContent = 'Reset stats';
 }, false);
-
-document.getElementById("appname").textContent = 'script has run';
