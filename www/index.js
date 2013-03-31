@@ -45,6 +45,8 @@ document.addEventListener('deviceready', function(){
         document.getElementById("mmax").textContent = maxmag = mag;}
       document.getElementById("mcur").textContent = mag;
       document.getElementById("mgra").textContent+= grest+'\n';
+      document.getElementById("mgra").scrollTop =
+        document.getElementById("mgra").scrollHeight;
     },reportErr,{frequency: 50});
 
 document.getElementById("appname").textContent = 'Reset stats';
