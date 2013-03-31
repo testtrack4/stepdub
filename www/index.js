@@ -17,16 +17,8 @@ document.addEventListener('deviceready', function(){
 
   function playSound(filename){
     var sound = new Media(getBaseName()+filename,
-    function onSuccess(val) {
-        console.log("success",val);
-    }, function onErr(val) {
-        console.log("err",val);
-    },function onStatus(val) {
-        console.log("status",val);
-    });
+      function onSuccess(){sound.release();});
     sound.play();
-//    sound.stop();
-//    sound.release();
   }
   var minmag, maxmag, grest;
   var framesay = 0.5;
