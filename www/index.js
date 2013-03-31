@@ -10,7 +10,9 @@ document.addEventListener('deviceready', function(){
     navigator.notification.alert(err.message);
   }
   function playSound(filename){
-    var sound = new Media(filename, undefined, reportErr);
+    var sound = new Media(filename, function onSuccess() {
+        console.log("playAudio():Audio Success");
+    }, reportErr);
     sound.play();
     sound.stop();
     sound.release();
@@ -31,6 +33,7 @@ document.addEventListener('deviceready', function(){
         document.getElementById("mmin").textContent = minmag = mag;}
       if(mag > maxmag){
         document.getElementById("mmax").textContent = maxmag = mag;}
+      document.getElementById("mcur").textContent = mag;
     },reportErr,{frequency: 50});
 
 document.getElementById("appname").textContent = 'Reset stats';
