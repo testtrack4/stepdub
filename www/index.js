@@ -21,8 +21,8 @@ document.addEventListener('deviceready', function(){
         console.log("playAudio():Audio Success");
     }, reportErr);
     sound.play();
-    sound.stop();
-    sound.release();
+//    sound.stop();
+//    sound.release();
   }
   var minmag, maxmag;
 
