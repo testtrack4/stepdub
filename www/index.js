@@ -25,6 +25,8 @@ document.addEventListener('deviceready', function(){
 //    sound.release();
   }
   var minmag, maxmag;
+  var grest = 9.8;
+  var framesay = .05;
 
   resetMags = function (){
     minmag = Infinity;
@@ -36,11 +38,13 @@ document.addEventListener('deviceready', function(){
   var watchID = navigator.accelerometer.watchAcceleration(
     function(acc){
       var mag = Math.sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
+      grest = grest * (1-framesay) + mag*framesay;
       if(mag < minmag){
         document.getElementById("mmin").textContent = minmag = mag;}
       if(mag > maxmag){
         document.getElementById("mmax").textContent = maxmag = mag;}
       document.getElementById("mcur").textContent = mag;
+      document.getElementById("mgra").textContent+= grest+'\n';
     },reportErr,{frequency: 50});
 
 document.getElementById("appname").textContent = 'Reset stats';
