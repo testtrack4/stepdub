@@ -2,7 +2,7 @@
 
 "use strict";
 
-var resetMags;
+var resetMags, setSay;
 
 document.addEventListener('deviceready', function(){
   function reportErr(err){
@@ -17,20 +17,30 @@ document.addEventListener('deviceready', function(){
 
   function playSound(filename){
     var sound = new Media(getBaseName()+filename,
-    function onSuccess() {
-        console.log("playAudio():Audio Success");
-    }, reportErr);
+    function onSuccess(val) {
+        console.log("success",val);
+    }, function onErr(val) {
+        console.log("err",val);
+    },function onStatus(val) {
+        console.log("status",val);
+    });
     sound.play();
 //    sound.stop();
 //    sound.release();
   }
-  var minmag, maxmag;
-  var grest = 9.8;
-  var framesay = .05;
+  var minmag, maxmag, grest;
+  var framesay = 0.5;
+  var gravbacklog = 15;
+
+  setSay = function(){
+    framesay = parseFloat(document.getElementById("sayval").value);
+  };
 
   resetMags = function (){
     minmag = Infinity;
     maxmag = 0;
+    grest = 9.8;
+    document.getElementById("mgra").textContent = '';
     playSound("sounds/boing.mp3");
   };
 
@@ -44,9 +54,13 @@ document.addEventListener('deviceready', function(){
       if(mag > maxmag){
         document.getElementById("mmax").textContent = maxmag = mag;}
       document.getElementById("mcur").textContent = mag;
-      document.getElementById("mgra").textContent+= grest+'\n';
-      document.getElementById("mgra").scrollTop =
-        document.getElementById("mgra").scrollHeight;
+
+      var gratc = document.getElementById("mgra").textContent;
+      while((gratc.match(/\n/g)||[]).length >= gravbacklog)
+        gratc = gratc.replace(/[^\n]*\n/,'');
+      document.getElementById("mgra").textContent =
+          gratc + grest + '\n';
+
     },reportErr,{frequency: 50});
 
 document.getElementById("appname").textContent = 'Reset stats';
