@@ -2,11 +2,11 @@
 
 "use strict";
 
-var resetMags, lastErr;
+var resetMags;
 
 document.addEventListener('deviceready', function(){
   function reportErr(err){
-    lastErr = err;
+    console.log(err);
     navigator.notification.alert(err.message);
   }
   function playSound(filename){
