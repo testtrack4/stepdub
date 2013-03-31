@@ -29,7 +29,7 @@ document.addEventListener('deviceready', function(){
   resetMags = function (){
     minmag = Infinity;
     maxmag = 0;
-    playSound("sounds/140867__juskiddink__boing.wav");
+    playSound("sounds/boing.mp3");
   };
 
   resetMags();
