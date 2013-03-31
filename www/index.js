@@ -27,7 +27,7 @@ document.addEventListener('deviceready', function(){
       if(mag < minmag){
         document.getElementById("mmin").textContent = minmag = mag;}
       if(mag > maxmag){
-        document.getElementById("mmin").textContent = maxmag = mag;}
+        document.getElementById("mmax").textContent = maxmag = mag;}
     },reportErr,{frequency: 50});
 
 document.getElementById("appname").textContent = 'reset stats';
