@@ -9,8 +9,15 @@ document.addEventListener('deviceready', function(){
     console.log(err);
     navigator.notification.alert(err.message);
   }
+
+  function getBaseName(){
+    var pn = window.location.pathname;
+    return pn.slice(0,pn.lastIndexOf('/')+1);
+  }
+
   function playSound(filename){
-    var sound = new Media(filename, function onSuccess() {
+    var sound = new Media(getBaseName()+filename,
+    function onSuccess() {
         console.log("playAudio():Audio Success");
     }, reportErr);
     sound.play();
@@ -18,13 +25,13 @@ document.addEventListener('deviceready', function(){
     sound.release();
   }
   var minmag, maxmag;
-  
+
   resetMags = function (){
     minmag = Infinity;
     maxmag = 0;
     playSound("sounds/140867__juskiddink__boing.wav");
   };
-  
+
   resetMags();
   var watchID = navigator.accelerometer.watchAcceleration(
     function(acc){
