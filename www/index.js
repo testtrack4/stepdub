@@ -24,13 +24,13 @@ document.addEventListener('deviceready', function(){
   var watchID = navigator.accelerometer.watchAcceleration(
     function(acc){
       var mag = Math.sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
-      if(mag < minmag){document.getElementById("mmin").textContent;
-        minmag = mag;}
-      if(mag > maxmag){document.getElementById("mmin").textContent;
-        maxmag = mag;}
+      if(mag < minmag){
+        document.getElementById("mmin").textContent = minmag = mag;}
+      if(mag > maxmag){
+        document.getElementById("mmin").textContent = maxmag = mag;}
     },reportErr,{frequency: 50});
 
-document.getElementById("appname") = 'reset stats';
+document.getElementById("appname").textContent = 'reset stats';
 }, false);
 
-document.getElementById("appname") = 'script has run';
+document.getElementById("appname").textContent = 'script has run';
