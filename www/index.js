@@ -21,7 +21,7 @@ document.addEventListener('deviceready', function(){
     sound.play();
   }
   var minmag, maxmag, grest;
-  var framesay = 0.5;
+  var framesay = 0.05;
   var gravbacklog = 15;
 
   setSay = function(){
@@ -33,19 +33,19 @@ document.addEventListener('deviceready', function(){
     maxmag = 0;
     grest = 9.8;
     document.getElementById("mgra").textContent = '';
-    playSound("sounds/boing.mp3");
   };
 
   resetMags();
   var watchID = navigator.accelerometer.watchAcceleration(
     function(acc){
       var mag = Math.sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
-      grest = grest * (1-framesay) + mag*framesay;
       if(mag < minmag){
         document.getElementById("mmin").textContent = minmag = mag;}
       if(mag > maxmag){
         document.getElementById("mmax").textContent = maxmag = mag;}
       document.getElementById("mcur").textContent = mag;
+
+      grest += (mag - grest) * framesay;
 
       var gratc = document.getElementById("mgra").textContent;
       while((gratc.match(/\n/g)||[]).length >= gravbacklog)
