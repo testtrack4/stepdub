@@ -21,7 +21,7 @@ document.addEventListener('deviceready', function(){
     sound.play();
   }
   var minmag, maxmag, grest;
-  var framesay = 0.05;
+  var framesay = 0.5;
   var gravbacklog = 15;
 
   setSay = function(){
@@ -45,7 +45,7 @@ document.addEventListener('deviceready', function(){
         document.getElementById("mmax").textContent = maxmag = mag;}
       document.getElementById("mcur").textContent = mag;
 
-      grest += (mag - grest) * framesay;
+      grest += Math.max(Math.min((mag - grest),framesay),-framesay);
 
       var gratc = document.getElementById("mgra").textContent;
       while((gratc.match(/\n/g)||[]).length >= gravbacklog)
