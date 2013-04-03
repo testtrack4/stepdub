@@ -2,7 +2,7 @@
 
 "use strict";
 
-var resetMags, setSay;
+var resetMags, setSay, playSound;
 
 document.addEventListener('deviceready', function(){
   function reportErr(err){
@@ -15,11 +15,12 @@ document.addEventListener('deviceready', function(){
     return pn.slice(0,pn.lastIndexOf('/')+1);
   }
 
-  function playSound(filename){
+  playSound = function(filename){
     var sound = new Media(getBaseName()+filename,
       function onSuccess(){sound.release();});
     sound.play();
-  }
+  };
+
   var minmag, maxmag, grest;
   var framesay = 0.5;
   var gravbacklog = 15;
