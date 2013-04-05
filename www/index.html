@@ -8,17 +8,16 @@
     <title>StepDub</title>
   </head>
   <body>
-    <h1 id="appname" onclick="resetMags()">StepDub</h1>
+    <h1 id="appname">StepDub</h1>
     <div id="deviceready">
+      <button type="button" onclick="playSound('sounds/boing.mp3');"
+        style="height:200px; width: 400px">Boing</button>
       <p>Min: <span id="mmin"></span></p>
       <p>Now: <span id="mcur"></span></p>
       <p>Max: <span id="mmax"></span></p>
       <p>Estimated gravity:
-        <input type="number" value="0.5" step="any" id="sayval">
-        <button type="button" onclick="setSay()">Set</button></p>
+        <button type="button"  onclick="resetMags()">Reset</button></p>
       <pre id="mgra"></pre>
-      <button type="button" onclick="playSound('sounds/boing.mp3');"
-        style="height:200px; width: 400px">Boing</button>
     </div>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="index.js"></script>

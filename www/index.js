@@ -21,18 +21,14 @@ document.addEventListener('deviceready', function(){
     sound.play();
   };
 
-  var minmag, maxmag, grest;
-  var framesay = 0.5;
+  var minmag, maxmag, gravg, frame;
   var gravbacklog = 15;
-
-  setSay = function(){
-    framesay = parseFloat(document.getElementById("sayval").value);
-  };
 
   resetMags = function (){
     minmag = Infinity;
     maxmag = 0;
-    grest = 9.8;
+    gravg = 0;
+    frame = 0;
     document.getElementById("mgra").textContent = '';
   };
 
@@ -46,10 +42,11 @@ document.addEventListener('deviceready', function(){
         document.getElementById("mmax").textContent = maxmag = mag;}
       document.getElementById("mcur").textContent = mag;
 
-      grest += Math.max(Math.min((mag - grest),framesay),-framesay);
+      frame++;
+      gravg = (gravg + mag) / frame;
 
       var gravlines = document.getElementById("mgra").textContent.split('\n');
-      gravlines.push(grest);
+      gravlines.push(gravg);
       document.getElementById("mgra").textContent = gravlines
         .slice(-gravbacklog).join('\n');
 
