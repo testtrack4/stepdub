@@ -42,8 +42,8 @@ document.addEventListener('deviceready', function(){
         document.getElementById("mmax").textContent = maxmag = mag;}
       document.getElementById("mcur").textContent = mag;
 
-      frame++;
-      gravg = (gravg + mag) / frame;
+      gravg = (frame*gravg + mag) / (frame+1);
+      ++frame;
 
       var gravlines = document.getElementById("mgra").textContent.split('\n');
       gravlines.push(gravg);
