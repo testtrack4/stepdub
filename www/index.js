@@ -48,11 +48,10 @@ document.addEventListener('deviceready', function(){
 
       grest += Math.max(Math.min((mag - grest),framesay),-framesay);
 
-      var gratc = document.getElementById("mgra").textContent;
-      while((gratc.match(/\n/g)||[]).length >= gravbacklog)
-        gratc = gratc.replace(/[^\n]*\n/,'');
-      document.getElementById("mgra").textContent =
-          gratc + grest + '\n';
+      var gravlines = document.getElementById("mgra").textContent.split('\n');
+      gravlines.push(grest);
+      document.getElementById("mgra").textContent = gravlines
+        .slice(-gravbacklog).join('\n');
 
     },reportErr,{frequency: 50});
 
