@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <title>StepDub</title>
+  </head>
+  <body>
+    <h1 id="appname">StepDubug</h1>
+    <div id="deviceready">
+      <button type="button" onclick="playSound('sounds/boing.mp3');"
+        style="height:200px; width: 400px">Boing</button>
+      <p>Min: <span id="mmin"></span></p>
+      <p>Now: <span id="mcur"></span></p>
+      <p>Max: <span id="mmax"></span></p>
+      <p>Estimated gravity:
+        <button type="button"  onclick="resetMags()">Reset</button></p>
+      <pre id="mgra"></pre>
+    </div>
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="functions.js"></script>
+    <script>
+      /*global reportErr*/
+      var minmag, maxmag, gravg, frame;
+      var gravbacklog = 15;
+
+      function resetMags (){
+        minmag = Infinity;
+        maxmag = 0;
+        gravg = 0;
+        frame = 0;
+        document.getElementById("mgra").textContent = '';
+      }
+
+      function accelWatcher(acc){
+        var mag = Math.sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
+        if(mag < minmag){
+          document.getElementById("mmin").textContent = minmag = mag;}
+        if(mag > maxmag){
+          document.getElementById("mmax").textContent = maxmag = mag;}
+        document.getElementById("mcur").textContent = mag;
+
+        gravg = (frame*gravg + mag) / (frame+1);
+        ++frame;
+
+        var gravlines = document.getElementById("mgra").textContent.split('\n');
+        gravlines.push(gravg);
+        document.getElementById("mgra").textContent = gravlines
+          .slice(-gravbacklog).join('\n');
+      }
+
+      document.addEventListener('deviceready', function(){
+        resetMags();
+        var watchID = navigator.accelerometer.watchAcceleration(
+          accelWatcher,reportErr,{frequency: 50});
+      }, false);
+    </script>
+  </body>
+</html>
