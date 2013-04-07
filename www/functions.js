@@ -52,6 +52,7 @@ function magAvgListener(options) {
 
   dis.reset = function(){
     maglist = [];
+    order = [];
   };
 
   function watcher(acc){
