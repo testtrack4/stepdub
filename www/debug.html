@@ -23,20 +23,26 @@
     <script type="text/javascript" src="functions.js"></script>
     <script>
       /*global reportErr*/
-      var minmag, maxmag, gravg, mags;
+      var minmag, maxmag, gravg, mags, order;
       var gravbacklog = 15;
       var gravsamples = 300;
       var gravmiddle = 5;
+
+      var max = Math.max,
+          min = Math.min,
+          sqrt = Math.sqrt,
+          floor = Math.floor;
 
       function resetMags (){
         minmag = Infinity;
         maxmag = 0;
         mags = [];
+        order = [];
         document.getElementById("mgra").textContent = '';
       }
 
       function accelWatcher(acc){
-        var mag = Math.sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
+        var mag = sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
         if(mag < minmag){
           document.getElementById("mmin").textContent = minmag = mag;}
         if(mag > maxmag){
@@ -45,15 +51,17 @@
 
         mags.push(mag);
         while(mags.length > gravsamples) mags.shift();
+        while(order.length < mags.length) order[order.length] = order.length;
+        order.sort(function(a,b){return mags[a]-mags[b]});
 
         gravg = 0;
-        for (var i = Math.max(Math.floor(mags.length / 2 - gravmiddle / 2));
-          i < (Math.min(Math.floor(mags.length / 2 + gravmiddle / 2),mags.length));
+        for (var i = max(floor(mags.length / 2 - gravmiddle / 2),0);
+          i < (min(floor(mags.length / 2 + gravmiddle / 2),mags.length));
           i++){
-            gravg += mags[i];
+            gravg += mags[order[i]];
           }
 
-        gravg /= Math.min(mags.length,gravmiddle);
+        gravg /= min(mags.length,gravmiddle);
 
         var gravlines = document.getElementById("mgra").textContent.split('\n');
         gravlines.push(gravg);
