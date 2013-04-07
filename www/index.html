@@ -11,7 +11,29 @@
     <h1 id="appname">StepDub</h1>
     <p><a href="debug.html">Debug</a></p>
     <p><a href="about.html">About</a></p>
+    <button type="button" onclick="sproing()">Shoe goes here</button>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="functions.js"></script>
+    <script>
+      /*global magAvgListener playSound*/
+
+      "use strict";
+      var mal = magAvgListener();
+
+      function primedSpring(mag,gravity){
+        var jerk = Math.abs(gravity-mag);
+        if(jerk > 2){
+          playSound('sounds/boing.mp3');
+          mal.setCb(function(mag,gravity){
+            if(Math.abs(gravity-mag) < jerk / 2)
+            mal.setCb(primedSpring);
+          });
+        }
+      }
+
+      function sproing(){
+        mal.setCb(primedSpring);
+      }
+    </script>
   </body>
 </html>

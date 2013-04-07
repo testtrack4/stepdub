@@ -15,6 +15,12 @@
       <p>Min: <span id="mmin"></span></p>
       <p>Now: <span id="mcur"></span></p>
       <p>Max: <span id="mmax"></span></p>
+      <p>Samples: <input type="number" value="127" step="any" id="samplum">
+        <button type="button" onclick="listenObj.setSamples(parseInt(document.getElementById('samplum'.value))">Set</button></p>
+      </p>
+      <p>Mediate: <input type="number" value="5" step="any" id="mediate">
+        <button type="button" onclick="listenObj.setMeandian(parseInt(document.getElementById('mediate'.value))">Set</button></p>
+      </p>
       <p>Estimated gravity:
         <button type="button"  onclick="resetMags()">Reset</button></p>
       <pre id="mgra"></pre>
@@ -22,46 +28,26 @@
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="functions.js"></script>
     <script>
-      /*global reportErr*/
-      var minmag, maxmag, gravg, mags, order;
-      var gravbacklog = 15;
-      var gravsamples = 300;
-      var gravmiddle = 5;
+      /*global reportErr magAvgListener*/
 
-      var max = Math.max,
-          min = Math.min,
-          sqrt = Math.sqrt,
-          floor = Math.floor;
+      "use strict";
+
+      var minmag, maxmag;
+      var gravbacklog = 15;
 
       function resetMags (){
         minmag = Infinity;
         maxmag = 0;
-        mags = [];
-        order = [];
+        listenObj.reset();
         document.getElementById("mgra").textContent = '';
       }
 
-      function accelWatcher(acc){
-        var mag = sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
+      function accelWatcher(mag,gravg){
         if(mag < minmag){
           document.getElementById("mmin").textContent = minmag = mag;}
         if(mag > maxmag){
           document.getElementById("mmax").textContent = maxmag = mag;}
         document.getElementById("mcur").textContent = mag;
-
-        mags.push(mag);
-        while(mags.length > gravsamples) mags.shift();
-        while(order.length < mags.length) order[order.length] = order.length;
-        order.sort(function(a,b){return mags[a]-mags[b]});
-
-        gravg = 0;
-        for (var i = max(floor(mags.length / 2 - gravmiddle / 2),0);
-          i < (min(floor(mags.length / 2 + gravmiddle / 2),mags.length));
-          i++){
-            gravg += mags[order[i]];
-          }
-
-        gravg /= min(mags.length,gravmiddle);
 
         var gravlines = document.getElementById("mgra").textContent.split('\n');
         gravlines.push(gravg);
@@ -69,11 +55,7 @@
           .slice(-gravbacklog).join('\n');
       }
 
-      document.addEventListener('deviceready', function(){
-        resetMags();
-        var watchID = navigator.accelerometer.watchAcceleration(
-          accelWatcher,reportErr,{frequency: 50});
-      }, false);
+      var listenObj = magAvgListener({cb:accelWatcher});
     </script>
   </body>
 </html>
