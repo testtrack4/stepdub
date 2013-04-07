@@ -23,14 +23,15 @@
     <script type="text/javascript" src="functions.js"></script>
     <script>
       /*global reportErr*/
-      var minmag, maxmag, gravg, frame;
+      var minmag, maxmag, gravg, mags;
       var gravbacklog = 15;
+      var gravsamples = 300;
+      var gravmiddle = 5;
 
       function resetMags (){
         minmag = Infinity;
         maxmag = 0;
-        gravg = 0;
-        frame = 0;
+        mags = [];
         document.getElementById("mgra").textContent = '';
       }
 
@@ -42,8 +43,17 @@
           document.getElementById("mmax").textContent = maxmag = mag;}
         document.getElementById("mcur").textContent = mag;
 
-        gravg = (frame*gravg + mag) / (frame+1);
-        ++frame;
+        mags.push(mag);
+        while(mags.length > gravsamples) mags.shift();
+
+        gravg = 0;
+        for (var i = Math.max(Math.floor(mags.length / 2 - gravmiddle / 2));
+          i < (Math.min(Math.floor(mags.length / 2 + gravmiddle / 2),mags.length));
+          i++){
+            gravg += mags[i];
+          }
+
+        gravg /= Math.min(mags.length,gravmiddle);
 
         var gravlines = document.getElementById("mgra").textContent.split('\n');
         gravlines.push(gravg);
