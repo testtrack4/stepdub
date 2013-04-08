@@ -18,6 +18,7 @@
       <p>Min: <span id="mmin"></span></p>
       <p>Now: <span id="mcur"></span></p>
       <p>Max: <span id="mmax"></span></p>
+      <button type="button" onclick="if(alsocb) alsocb=null; else alsocb=primedSpring" style="height:200px; width: 400px">MAKE IT STOP/START!</button>
       <p>Samples: <input type="number" value="127" step="any" id="samplum">
         <button type="button" onclick="listenObj.setSamples(parseInt(document.getElementById('samplum').value,10))">Set</button></p>
       </p>
@@ -63,6 +64,7 @@
         gravlines.push(gravg);
         document.getElementById("mgra").textContent = gravlines
           .slice(-gravbacklog).join('\n');
+        if(alsocb) alsocb(mag,gravg);
       }
 
       function primedSpring(mag,gravity){
