@@ -6,20 +6,26 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <link rel="stylesheet" type="text/css" href="index.css" />
     <title>StepDub</title>
+    <style>
+      body {
+        font-size: 2em;
+      }
+    </style>
   </head>
   <body>
     <h1 id="appname">StepDubug</h1>
     <div id="deviceready">
-      <button type="button" onclick="playSound('sounds/boing.mp3');"
-        style="height:200px; width: 400px">Boing</button>
       <p>Min: <span id="mmin"></span></p>
       <p>Now: <span id="mcur"></span></p>
       <p>Max: <span id="mmax"></span></p>
       <p>Samples: <input type="number" value="127" step="any" id="samplum">
-        <button type="button" onclick="listenObj.setSamples(parseInt(document.getElementById('samplum'.value))">Set</button></p>
+        <button type="button" onclick="listenObj.setSamples(parseInt(document.getElementById('samplum').value,10))">Set</button></p>
       </p>
       <p>Mediate: <input type="number" value="5" step="any" id="mediate">
-        <button type="button" onclick="listenObj.setMeandian(parseInt(document.getElementById('mediate'.value))">Set</button></p>
+        <button type="button" onclick="listenObj.setMeandian(parseInt(document.getElementById('mediate').value,10))">Set</button></p>
+      </p>
+      <p>Jerk factor: <input type="number" value="5" step="any" id="jerky">
+        <button type="button" onclick="jerkFactor = parseInt(document.getElementById('jerky').value,10)">Set</button></p>
       </p>
       <p>Estimated gravity:
         <button type="button"  onclick="resetMags()">Reset</button></p>
@@ -28,9 +34,13 @@
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="functions.js"></script>
     <script>
-      /*global reportErr magAvgListener*/
+      /*global reportErr magAvgListener playSound*/
 
       "use strict";
+
+      var alsocb;
+
+      var jerkFactor = 5;
 
       var minmag = Infinity, maxmag = 0;
       var gravbacklog = 15;
@@ -53,6 +63,21 @@
         gravlines.push(gravg);
         document.getElementById("mgra").textContent = gravlines
           .slice(-gravbacklog).join('\n');
+      }
+
+      function primedSpring(mag,gravity){
+        var jerk = Math.abs(gravity-mag);
+        if(jerk > jerkFactor){
+          playSound('sounds/boing.mp3');
+          alsocb = function(mag,gravity){
+            if(Math.abs(gravity-mag) < jerk / 2)
+            alsocb = primedSpring;
+          };
+        }
+      }
+
+      function sproing(){
+        alsocb = primedSpring;
       }
 
       var listenObj = magAvgListener({cb:accelWatcher});
