@@ -29,22 +29,25 @@ body {
   user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
+header {
+  margin: 0 1rem;
+}
+
 footer {
   text-align: center;
 }
 
 h1, h2 {
   font-family: Racing Sans One;
+  margin: 0;
 }
 
 h1 {
   text-align: left;
-  margin: 0 1rem;
   font-size: 2em;
 }
 
 h2 {
-  margin: 0;
   font-size: 1em;
 }
 
