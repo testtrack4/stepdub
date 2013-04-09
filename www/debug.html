@@ -14,18 +14,18 @@
   <body>
     <h1 id="appname">StepDubug</h1>
     <div id="deviceready">
+      <img class="shoe-button" src="shoes/spring.svg" onclick="sproing()">
+      <p>Jerk factor: <input type="number" value="5" step="any" id="jerky"></p>
+      <p>Rest period: <input type="number" value="2" step="any" id="calmness"></p>
+      <p>Calm threshold: <input type="number" value="1" step="any" id="resty"></p>
       <p>Min: <span id="mmin"></span></p>
       <p>Now: <span id="mcur"></span></p>
       <p>Max: <span id="mmax"></span></p>
-      <button type="button" onclick="if(alsocb) alsocb=null; else alsocb=primedSpring" style="height:200px; width: 400px">MAKE IT STOP/START!</button>
       <p>Samples: <input type="number" value="127" step="any" id="samplum">
         <button type="button" onclick="listenObj.setSamples(parseInt(document.getElementById('samplum').value,10))">Set</button></p>
       </p>
       <p>Mediate: <input type="number" value="5" step="any" id="mediate">
         <button type="button" onclick="listenObj.setMeandian(parseInt(document.getElementById('mediate').value,10))">Set</button></p>
-      </p>
-      <p>Jerk factor: <input type="number" value="5" step="any" id="jerky">
-        <button type="button" onclick="jerkFactor = parseInt(document.getElementById('jerky').value,10)">Set</button></p>
       </p>
       <p>Estimated gravity:
         <button type="button"  onclick="resetMags()">Reset</button></p>
@@ -34,13 +34,11 @@
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="functions.js"></script>
     <script>
-      /*global reportErr magAvgListener playSound*/
+      /*global reportErr magAvgListener stepDubber*/
 
       "use strict";
 
       var alsocb;
-
-      var jerkFactor = 5;
 
       var minmag = Infinity, maxmag = 0;
       var gravbacklog = 15;
@@ -66,19 +64,12 @@
         if(alsocb) alsocb(mag,gravg);
       }
 
-      function primedSpring(mag,gravity){
-        var jerk = Math.abs(gravity-mag);
-        if(jerk > jerkFactor){
-          playSound('sounds/boing.mp3');
-          alsocb = function(mag,gravity){
-            if(Math.abs(gravity-mag) < jerk / 2)
-            alsocb = primedSpring;
-          };
-        }
-      }
-
       function sproing(){
-        alsocb = primedSpring;
+        alsocb = stepDubber('sounds/boing.mp3',{
+          minJerk: parseInt(document.getElementById('jerky').value,10),
+          maxCalm: parseInt(document.getElementById('resty').value,10),
+          calmFrames: parseInt(document.getElementById('calmness').value,10)
+        });
       }
 
       var listenObj = magAvgListener({cb:accelWatcher});

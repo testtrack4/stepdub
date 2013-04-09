@@ -15,12 +15,9 @@
     <h1 id="appname">TestBed</h1>
     <div id="deviceready">
       <img class="shoe-button" src="shoes/spring.svg" onclick="sproing()">
-      <p>Samples: <input type="number" value="2" step="any" id="samplum">
-      </p>
-      <p>Calm: <input type="number" value="1" step="any" id="mediate">
-      </p>
-      <p>Jerk: <input type="number" value="2" step="any" id="jerky">
-      </p>
+      <p>Samples: <input type="number" value="2" step="any" id="calmness"></p>
+      <p>Calm: <input type="number" value="1" step="any" id="resty"></p>
+      <p>Jerk: <input type="number" value="2" step="any" id="jerky"></p>
       <p><a href="debug.html">Noisy testbed</a></p>
     </div>
     <script type="text/javascript" src="phonegap.js"></script>
@@ -33,8 +30,8 @@
       function sproing(){
         mal.setCb(stepDubber('sounds/boing.mp3',{
           minJerk: parseInt(document.getElementById('jerky').value,10),
-          maxCalm: parseInt(document.getElementById('mediate').value,10),
-          calmFrames: parseInt(document.getElementById('samplum').value,10)
+          maxCalm: parseInt(document.getElementById('resty').value,10),
+          calmFrames: parseInt(document.getElementById('calmness').value,10)
         }));
       }
     </script>
