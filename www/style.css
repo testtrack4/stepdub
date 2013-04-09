@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Racing Sans One';
+  font-style: normal;
+  font-weight: 400;
+  src: url(RacingSansOne-Regular.woff) format('woff'), url(RacingSansOne-Regular.ttf) format('ttf');
+}
+
 html {
   margin: 0;
   padding: 0;
@@ -9,7 +16,7 @@ body {
   font-size:24px;
   height:100%;
   margin:0;
-  padding:24px;
+  padding:0;
   width:100%;
   box-sizing: border-box;
   -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
@@ -22,9 +29,47 @@ body {
   user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
+footer {
+  text-align: center;
+}
+
+h1, h2 {
+  font-family: Racing Sans One;
+}
+
+h1 {
+  text-align: left;
+  margin: 0 1rem;
+  font-size: 2em;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1em;
+}
+
+.banner {
+  margin: 0;
+  padding: 0.25em 0;
+  text-align: center;
+  background-color: #0b0;
+  color: white;
+}
+
 input {
   -webkit-user-select: auto;
   -moz-user-select: auto;
   -ms-user-select: auto;
   user-select: auto;
 }
+
+.buttons {
+  margin: 1em;
+  text-align: center;
+}
+
+.shoe-button {
+  height: 64px;
+  width: 64px;
+}
+
