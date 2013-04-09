@@ -9,9 +9,10 @@
   </head>
   <body>
     <h1 id="appname">StepDub</h1>
+    <h1 id="active-label">Not running</h1>
     <p><a href="debug.html">Debug</a></p>
     <p><a href="about.html">About</a></p>
-    <button type="button" onclick="sproing()">Shoe goes here</button>
+    <img src="shoes/spring.svg" onclick="sproing()">
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="functions.js"></script>
     <script>
@@ -23,15 +24,19 @@
       function primedSpring(mag,gravity){
         var jerk = Math.abs(gravity-mag);
         if(jerk > 2){
+          var counter = 0;
           playSound('sounds/boing.mp3');
           mal.setCb(function(mag,gravity){
-            if(Math.abs(gravity-mag) < jerk / 2)
-            mal.setCb(primedSpring);
+            if(Math.abs(gravity-mag) < 1) {
+              counter++;
+              if(counter > 5) mal.setCb(primedSpring);
+            }
           });
         }
       }
 
       function sproing(){
+        document.getElementById("active-label").textContent = "Spring In Your Step";
         mal.setCb(primedSpring);
       }
     </script>
