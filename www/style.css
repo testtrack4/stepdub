@@ -2,7 +2,7 @@
   font-family: 'Racing Sans One';
   font-style: normal;
   font-weight: 400;
-  src: url(RacingSansOne-Regular.woff) format('woff'), url(RacingSansOne-Regular.ttf) format('ttf');
+  src: url(RacingSansOne-Regular.woff) format('woff'), url(RacingSansOne-Regular.ttf) format('opentype');
 }
 
 html {
