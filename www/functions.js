@@ -18,7 +18,7 @@ function playSound(filename){
   sound.play();
 }
 
-function stepDubber(mal,filename,options){
+function stepDubber(filename,mal,options){
   options = options || {};
   var minJerk = options.minJerk || 5;
   var maxCalm = options.maxCalm || 1;
