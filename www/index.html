@@ -16,24 +16,11 @@
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="functions.js"></script>
     <script>
-      /*global magAvgListener playSound*/
+      /*global magAvgListener stepDubber*/
 
       "use strict";
       var mal = magAvgListener();
-
-      function primedSpring(mag,gravity){
-        var jerk = Math.abs(gravity-mag);
-        if(jerk > 2){
-          var counter = 0;
-          playSound('sounds/boing.mp3');
-          mal.setCb(function(mag,gravity){
-            if(Math.abs(gravity-mag) < 1) {
-              counter++;
-              if(counter > 5) mal.setCb(primedSpring);
-            }
-          });
-        }
-      }
+      var primedSpring = stepDubber('sounds/boing.mp3',mal);
 
       function sproing(){
         document.getElementById("active-label").textContent = "Spring In Your Step";

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>StepDub</title>
+    <style>
+      body {
+        font-size: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="appname">StepDuvelopment</h1>
+    <div id="deviceready">
+      <p>Min jerk: <span id="mmin"></span></p>
+      <p>Reprime max jerk: <span id="mcur"></span></p>
+      <p>Reprime frames: <span id="mmax"></span></p>
+      <button type="button" onclick="reestablish()">Activate</button>
+      <p>Samples: <input type="number" value="5" step="any" id="samplum">
+      </p>
+      <p>Calm: <input type="number" value="1" step="any" id="mediate">
+      </p>
+      <p>Jerk: <input type="number" value="5" step="any" id="jerky">
+      </p>
+    </div>
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="functions.js"></script>
+    <script>
+      /*global reportErr magAvgListener stepDubber*/
+
+      "use strict";
+      var mal = magAvgListener();
+      function reestablish(){
+        mal.setCb(stepDubber,mal,{
+          minJerk: parseInt(document.getElementById('jerky').value,10),
+          maxCalm: parseInt(document.getElementById('mediate').value,10),
+          calmFrames: parseInt(document.getElementById('samplum').value,10)
+        });
+      }
+    </script>
+  </body>
+</html>

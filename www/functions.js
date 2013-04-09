@@ -18,6 +18,29 @@ function playSound(filename){
   sound.play();
 }
 
+function stepDubber(mal,filename,options){
+  options = options || {};
+  var minJerk = options.minJerk || 5;
+  var maxCalm = options.maxCalm || 1;
+  var calmFrames = options.calmFrames || 3;
+
+  function primed(mag,gravity){
+    var jerk = Math.abs(gravity-mag);
+    if(jerk > minJerk){
+      var counter = 0;
+      playSound(filename);
+      mal.setCb(function(mag,gravity){
+        if(Math.abs(gravity-mag) < maxCalm) {
+          counter++;
+          if(counter > calmFrames) mal.setCb(primed);
+        }
+      });
+    }
+  }
+
+  return primed;
+}
+
 function magAvgListener(options) {
   var max = Math.max,
       min = Math.min,
