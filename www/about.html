@@ -14,7 +14,15 @@
     </style>
   </head>
   <body>
-    <h1>StepDub</h1>
+    <h1>
+      <span onclick="code('s')">S</span>
+      <span onclick="code('t')">t</span>
+      <span onclick="code('e')">e</span>
+      <span onclick="code('p')">p</span>
+      <span onclick="code('d')">D</span>
+      <span onclick="code('u')">u</span>
+      <span onclick="code('b')">b</span>
+    </h1>
     <h2>About</h2>
     <p>StepDub proudly incorporates several free cultural works:</p>
     <p><a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">CC-BY</a> licensed sounds from <a href="http://freesound.org">Freesound</a>:
@@ -33,7 +41,21 @@
         <li><a href="http://openclipart.org/detail/13903/black-hare-by-johnny_automatic" target="_blank">black hare by johnny_automatic / Jay Van Everen</a></li>
       </ul>
     </p>
-    <p><a href="https://c9.io/stuartpb/stepdub/workspace/www/index.html" class="stealthlink">oh no</a> <a href="develop.html" class="stealthlink">how did this get here</a> <a href="debug.html" class="stealthlink">i am not good with phones</a></p>
     <footer></footer>
+    <script>
+      var buf = '!';
+      function code(char) {
+        if(buf){
+          buf = (buf + char).slice(-8);
+          if(buf == 'spbdebut'){
+            var kapow = document.createElement('a');
+            kapow.href='develop.html';
+            kapow.innerHTML = '<img src="shoes/spring.svg" style="width: 64px; -webkit-transform: rotate(180deg);">';
+            document.getElementsByTagName('footer')[0].appendChild(kapow);
+            buf = null;
+          }
+        }
+      }
+    </script>
   </body>
 </html>
