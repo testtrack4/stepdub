@@ -34,7 +34,7 @@
       "use strict";
       var mal = magAvgListener();
       function reestablish(){
-        mal.setCb(stepDubber,mal,{
+        mal.setCb(stepDubber('sounds/boing.mp3',mal,{
           minJerk: parseInt(document.getElementById('jerky').value,10),
           maxCalm: parseInt(document.getElementById('mediate').value,10),
           calmFrames: parseInt(document.getElementById('samplum').value,10)
