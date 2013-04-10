@@ -23,28 +23,32 @@ function stepDubber(filename,options){
   var minJerk = options.minJerk || 2;
   var maxCalm = options.maxCalm || 1;
 
+  var swing;
+
   var state;
+
+  function ready(mag,gravity ){
+    var jerk = Math.abs(gravity-mag);
+    if(jerk > minJerk){
+      swing = jerk;
+      state = primed;
+    }
+  }
+
+  function primed(mag,gravity){
+    var jerk = Math.abs(gravity-mag);
+    if (jerk-swing < 0) {
+      playSound(filename);
+      state = comedown;
+    } else {
+      swing = jerk;
+    }
+  }
 
   function comedown(mag,gravity) {
     var jerk = Math.abs(gravity-mag);
     if (jerk < maxCalm) {
       state = ready;
-    }
-  }
-
-  function ready(mag,gravity ){
-    var jerk = Math.abs(gravity-mag);
-    if(jerk > minJerk){
-      var swing = jerk;
-      state = function(mag,gravity){
-        var jerk = Math.abs(gravity-mag);
-        if (jerk-swing < 0) {
-          playSound(filename);
-          state = comedown;
-        } else {
-          swing = jerk;
-        }
-      };
     }
   }
 
