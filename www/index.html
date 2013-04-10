@@ -13,6 +13,7 @@
     <div class="buttons">
       <img class="shoe-button" src="shoes/ninja.svg" onclick="shhhhhh()">
       <img class="shoe-button" src="shoes/spring.svg" onclick="sproing()">
+      <img class="shoe-button" src="shoes/gargantuan.svg" onclick="rooooar()">
     </div>
     <footer><a href="about.html">About</a></footer>
     <script type="text/javascript" src="phonegap.js"></script>
@@ -24,6 +25,7 @@
       "use strict";
       var mal = magAvgListener();
       var primedSpring = stepDubber('sounds/boing.mp3');
+      var primedBoom = stepDubber('sounds/boom.mp3');
 
       function shhhhhh(){
         document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
@@ -32,6 +34,10 @@
       function sproing(){
         document.getElementById("active-label").textContent = "Spring In Your Step";
         mal.setCb(primedSpring);
+      }
+      function rooooar(){
+        document.getElementById("active-label").textContent = "Big Boom";
+        mal.setCb(primedBoom);
       }
     </script>
   </body>
