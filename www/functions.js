@@ -2,58 +2,69 @@
 
 "use strict";
 
-function reportErr(err){
+function reportErr(err) {
   console.log(err);
   navigator.notification.alert(err.message);
 }
 
-function getAppLocalBase(){
+function getAppLocalBase() {
   var pn = window.location.pathname;
   return pn.slice(0,pn.lastIndexOf('/')+1);
 }
 
-function playSound(filename){
+function playSound(filename) {
   var sound = new Media(getAppLocalBase()+filename,
     function onSuccess(){sound.release();});
   sound.play();
 }
 
-function stepDubber(filename,options){
+function stepDubber(filename,options) {
   options = options || {};
   var minJerk = options.minJerk || 2;
   var maxCalm = options.maxCalm || 1;
 
-  var swing;
+  var delta = 1, previous = 0;
 
   var state;
 
-  function ready(mag,gravity ){
-    var jerk = Math.abs(gravity-mag);
-    if(jerk > minJerk){
-      swing = jerk;
+  function machine(mag, gravity){
+    var gmag = mag-gravity;
+    state(gmag);
+    delta = gmag - previous;
+    previous = gmag;
+  }
+
+  function ready(gmag) {
+    if(Math.abs(gmag) > minJerk){
       state = primed;
     }
   }
 
-  function primed(mag,gravity){
-    var jerk = Math.abs(gravity-mag);
-    if (jerk-swing < 0) {
+  function primed(gmag) {
+    //if the current delta is opposite the previous delta
+    if (gmag - previous < 0 == delta < 0 ) {
+      //we've hit the peak
       playSound(filename);
-      state = comedown;
-    } else {
-      swing = jerk;
+      state = rebound;
     }
   }
 
-  function comedown(mag,gravity) {
-    var jerk = Math.abs(gravity-mag);
-    if (jerk < maxCalm) {
+  function rebound(gmag) {
+    //if the current delta is opposite the previous delta
+    if (gmag - previous < 0 == delta < 0 ) {
+      //we've hit the equal and opposite reaction
+      state = comedown;
+    }
+  }
+
+  function comedown(gmag) {
+    if (Math.abs(gmag) < maxCalm) {
       state = ready;
     }
   }
 
   state = ready;
-  return function(m,g){state(m,g);};
+  return machine;
 }
 
 function magAvgListener(options) {
@@ -73,32 +84,32 @@ function magAvgListener(options) {
   //it's almost like a "this" object!
   var dis = {};
 
-  dis.setCb = function(newcb){
+  dis.setCb = function(newcb) {
     cb = newcb;
   };
 
-  dis.setSamples = function(newsamples){
+  dis.setSamples = function(newsamples) {
     samples = newsamples;
     //If we now have too many items in the order list,
     //just reset it and it will regenerate next watch interval
     if (order.length > samples) order = [];
   };
 
-  dis.setMeandian = function(newm){
+  dis.setMeandian = function(newm) {
     meandian = newm;
   };
 
-  dis.reset = function(){
+  dis.reset = function() {
     maglist = [];
     order = [];
   };
 
-  function watcher(acc){
+  function watcher(acc) {
     var mag = sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
     maglist.push(mag);
     while(maglist.length > samples) maglist.shift();
     while(order.length < maglist.length) order[order.length] = order.length;
-    order.sort(function(a,b){ return maglist[a] - maglist[b] });
+    order.sort(function(a,b){return maglist[a] - maglist[b];});
 
     var gravg = 0;
     var rangeStart = max(0, floor(order.length / 2 - meandian / 2));
