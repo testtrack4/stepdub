@@ -22,6 +22,7 @@ function stepDubber(filename,options) {
   options = options || {};
   var minJerk = options.minJerk || 2;
   var maxCalm = options.maxCalm || 1;
+  var debugcb = options.debugcb;
 
   var delta = 1, previous = 0;
 
@@ -32,6 +33,12 @@ function stepDubber(filename,options) {
     state(gmag);
     delta = gmag - previous;
     previous = gmag;
+    if(debugcb) debugcb({
+      state: state,
+      gmag: gmag,
+      delta: delta,
+      previous: previous
+    });
   }
 
   function ready(gmag) {
