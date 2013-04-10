@@ -9,8 +9,9 @@
   </head>
   <body>
     <header><h1 id="appname">StepDub</h1></header>
-    <h2 id="active-label" class="banner">Ninja Shoes</h1>
+    <h2 id="active-label" class="banner">Ninja Clan Foot Stealth</h1>
     <div class="buttons">
+      <img class="shoe-button" src="shoes/ninja.svg" onclick="shhhhhh()">
       <img class="shoe-button" src="shoes/spring.svg" onclick="sproing()">
     </div>
     <footer><a href="about.html">About</a></footer>
@@ -24,6 +25,10 @@
       var mal = magAvgListener();
       var primedSpring = stepDubber('sounds/boing.mp3');
 
+      function shhhhhh(){
+        document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
+        mal.setCb(null);
+      }
       function sproing(){
         document.getElementById("active-label").textContent = "Spring In Your Step";
         mal.setCb(primedSpring);
