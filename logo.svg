@@ -24,12 +24,101 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs6">
+    <linearGradient
+       id="linearGradient3875">
+      <stop
+         style="stop-color:#3c0000;stop-opacity:1;"
+         offset="0"
+         id="stop3877" />
+      <stop
+         id="stop3893"
+         offset="0.125"
+         style="stop-color:#8c0000;stop-opacity:1;" />
+      <stop
+         style="stop-color:#a80000;stop-opacity:1;"
+         offset="0.25"
+         id="stop3879" />
+      <stop
+         id="stop3881"
+         offset="0.32266784"
+         style="stop-color:#8c0000;stop-opacity:1;" />
+      <stop
+         style="stop-color:#b00000;stop-opacity:1;"
+         offset="0.5"
+         id="stop3883" />
+      <stop
+         style="stop-color:#8c0000;stop-opacity:1;"
+         offset="0.56999999"
+         id="stop3885" />
+      <stop
+         id="stop3887"
+         offset="0.75"
+         style="stop-color:#b80000;stop-opacity:1;" />
+      <stop
+         style="stop-color:#8c0000;stop-opacity:1;"
+         offset="0.81999999"
+         id="stop3889" />
+      <stop
+         id="stop3891"
+         offset="1"
+         style="stop-color:#c40000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3838">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3841" />
+      <stop
+         id="stop3865"
+         offset="0.33000001"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         style="stop-color:#c0c0c0;stop-opacity:1;"
+         offset="1"
+         id="stop3843" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3829">
+      <stop
+         id="stop3855"
+         offset="0"
+         style="stop-color:#3c0000;stop-opacity:1;" />
+      <stop
+         id="stop3853"
+         offset="0.25"
+         style="stop-color:#a80000;stop-opacity:1;" />
+      <stop
+         style="stop-color:#8c0000;stop-opacity:1;"
+         offset="0.32266784"
+         id="stop3859" />
+      <stop
+         id="stop3851"
+         offset="0.5"
+         style="stop-color:#b00000;stop-opacity:1;" />
+      <stop
+         id="stop3847"
+         offset="0.56999999"
+         style="stop-color:#8c0000;stop-opacity:1;" />
+      <stop
+         style="stop-color:#b80000;stop-opacity:1;"
+         offset="0.75"
+         id="stop3849" />
+      <stop
+         id="stop3863"
+         offset="0.81999999"
+         style="stop-color:#8c0000;stop-opacity:1;" />
+      <stop
+         style="stop-color:#c40000;stop-opacity:1;"
+         offset="1"
+         id="stop3834" />
+    </linearGradient>
     <linearGradient
        id="linearGradient3835">
       <stop
@@ -133,11 +222,11 @@
     <linearGradient
        id="linearGradient3828">
       <stop
-         style="stop-color:#ffcd01;stop-opacity:1;"
+         style="stop-color:#3d01ff;stop-opacity:1;"
          offset="0"
          id="stop3830" />
       <stop
-         style="stop-color:#bc9800;stop-opacity:1;"
+         style="stop-color:#2c00bc;stop-opacity:1;"
          offset="1"
          id="stop3832" />
     </linearGradient>
@@ -285,6 +374,26 @@
        x2="141.8412"
        y2="355.88309"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3838"
+       id="linearGradient3845"
+       x1="655.3631"
+       y1="231.45944"
+       x2="655.3631"
+       y2="355.27954"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3875"
+       id="radialGradient3873"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.0962549,-1.7297164e-8,1.7424412e-8,2.1116762,110.69736,-148.66354)"
+       cx="2.1958482"
+       cy="132.01715"
+       fx="2.1958482"
+       fy="132.01715"
+       r="514.5" />
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -303,14 +412,49 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:snap-page="true"
-     inkscape:zoom="3"
-     inkscape:cx="128"
-     inkscape:cy="128"
+     inkscape:snap-page="false"
+     inkscape:zoom="2.1213203"
+     inkscape:cx="244.87563"
+     inkscape:cy="101.21158"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer5" />
+     inkscape:current-layer="layer9"
+     showborder="false"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true" />
+  <g
+     style="display:none"
+     inkscape:label="bg copy"
+     id="g3867"
+     inkscape:groupmode="layer">
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       y="-782"
+       x="-63.444927"
+       height="1820"
+       width="1024"
+       id="rect3869"
+       style="fill:url(#radialGradient3873);fill-opacity:1;stroke:none" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer9"
+     inkscape:label="feature-graphic-region"
+     style="display:none">
+    <rect
+       style="fill:none;stroke:none"
+       id="rect3058"
+       width="1024"
+       height="500"
+       x="-63.444927"
+       y="-122"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
   <g
      inkscape:groupmode="layer"
      id="layer7"
@@ -324,7 +468,10 @@
        d="m 187.625,13.749999 c 0,0 4.25,11.75 9.5,16.75 5.83819,5.560178 45.75,31.625 45.75,31.625 L 165,115 141.5,88 z"
        id="path3867"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cscccc" />
+       sodipodi:nodetypes="cscccc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -337,7 +484,10 @@
        d="m 226.70776,176.52919 c -4.6067,10.93134 -23.29589,34.31455 -28.83766,37.06877 -10.59114,5.26374 -78.63336,8.29196 -78.63336,8.29196 l 91.15126,155.27627 9.8206,-4.20883 c 0,0 21.62896,-42.25779 28.99419,-58.45601 7.36522,-16.19822 6.32039,-22.81689 15.90003,-38.34715 9.57964,-15.53025 44.42657,-51.44128 44.42657,-51.44128 0,0 -35.03941,-53.84503 -43.72509,-48.16776 -13.86871,9.06509 -38.21702,34.83623 -38.21702,34.83623 0,0 20.3273,-36.08109 16.96256,-45.50169 -3.36473,-9.4206 -12.88785,-13.70585 -12.88785,-13.70585 0,0 -0.34753,13.424 -4.95423,24.35534 z"
        id="path2990"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="zsccczzcsczcz" />
+       sodipodi:nodetypes="zsccczzcsczcz"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -350,7 +500,10 @@
        d="m 100.80204,169.20504 c 0,0 14.88048,-11.40836 31.249,-12.40039 16.36852,-0.99204 25.13146,7.93625 28.7689,10.41633 16.78652,13.40383 21.16887,33.458 24.80079,48.11352 2.04734,8.26143 7.2778,41.32453 9.58964,53.40435 2.03722,10.64487 21,26.29338 -14.21912,45.79879 -43.97451,24.35442 -80.18921,-145.3326 -80.18921,-145.3326 z"
        id="path2993"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cscsssc" />
+       sodipodi:nodetypes="cscsssc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -363,43 +516,64 @@
        d="m 212.3755,386.0515 c 0,0 -93.33159,-83.64881 -111.17488,-118.15293 -7.604218,-14.70451 -19.415849,-89.71664 -19.415849,-89.71664 7.974786,-5.8643 18.038065,-12.19797 26.720649,-11.2515 34.69194,3.78168 47.61104,25.61665 54.65012,50.76777 2.47626,8.84784 9.35296,58.68983 9.35296,63.60014 0,4.9103 -0.23382,20.10886 0.9353,22.91475 1.16912,2.80589 2.33823,6.54708 5.8456,10.98974 3.50736,4.44265 29.69565,38.81478 31.33242,40.9192 1.63677,2.10441 8.50467,14.03147 8.41767,15.90004 -0.26918,5.78136 -2.72326,9.78322 -6.66399,14.02943 z"
        id="path3777"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cscsssssssc" />
+       sodipodi:nodetypes="cscsssssssc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:url(#linearGradient3841);fill-opacity:1;stroke:none;display:inline"
        d="m 94.878916,305.73295 c 0,0 19.875044,16.95224 21.044174,19.05666 1.16911,2.10441 4.91029,14.67246 4.91029,14.67246 0,0 21.27799,12.15885 30.16331,12.86032 8.88531,0.70147 35.21547,-3.36333 35.21547,-3.36333 l -22.63455,-26.2974 c 0,0 -22.82135,-21.543 -39.42285,-23.17977 -16.60151,-1.63677 -29.275844,6.25106 -29.275844,6.25106 z"
        id="path3779"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cscsccsc" />
+       sodipodi:nodetypes="cscsccsc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:url(#linearGradient3904);fill-opacity:1;stroke:none"
        d="m 103.5047,177.83648 c -11.139428,-1.07859 -16.09558,-1.56418 -22.940462,2.60658 -8.966438,5.46347 -15.030782,10.54718 -20.057455,22.05658 -5.96219,13.65142 -7.950018,33.90448 -6.547073,44.66039 1.402944,10.7559 7.248123,27.05411 10.755906,32.96919 11.925025,20.10886 17.770626,24.08387 23.61623,25.01917 5.845602,0.93529 34.839784,6.07943 44.192744,10.52208 9.35296,4.44266 28.52653,14.4971 28.52653,14.4971 0,0 0,-38.58098 -2.33824,-60.09279 -2.33824,-21.51181 -8.41767,-55.4163 -13.79562,-65.23691 -5.37795,-9.8206 -27.18518,-25.6238 -41.41256,-27.00139 z"
        id="path3764"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ssssssscsss" />
+       sodipodi:nodetypes="ssssssscsss"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:url(#linearGradient3831);fill-opacity:1;stroke:none"
        d="m 64.814896,194.4847 c 18.321689,-15.15681 40.576164,-19.05982 59.058204,-4.37774 24.09908,19.14425 25.04418,59.30831 28.89713,88.82079 0.97616,7.47714 3.37059,35.10595 5.24118,43.05597 1.87059,7.95002 3.27354,8.18385 3.27354,8.18385 0,0 3.03971,-5.37796 3.74118,-5.84561 0,0 -6.43583,-69.40175 -13.08851,-102.08462 -1.95689,-9.61367 -5.34319,-19.45344 -16.96376,-32.91452 -7.54125,-8.73566 -24.86892,-18.27208 -37.90086,-16.94662 -13.398167,1.3627 -18.708083,6.79039 -25.047565,12.58944 -1.923618,1.75963 -7.210539,9.51906 -7.210539,9.51906 z"
        id="path3766"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csssccssssc" />
+       sodipodi:nodetypes="csssccssssc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:#161650;stroke:none"
        d="m 185.29066,347.92486 c 0,0 -1.83741,4.22216 -4.12379,8.89864 -2.06427,4.2222 -2.86262,9.124 -2.86262,9.124 0,0 9.69518,19.96725 11.09813,24.87756 1.40294,4.9103 12.62641,9.60663 12.62641,9.60663 l 11.86656,-16.25078 c 0,0 -4.44265,-13.6787 -12.86032,-23.3824 -4.02182,-4.63627 -15.74437,-12.87365 -15.74437,-12.87365 z"
        id="path3768"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cscsccsc" />
+       sodipodi:nodetypes="cscsccsc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:#1a1a5e;fill-opacity:1;stroke:none"
        d="m 116.74146,326.6602 c -0.86093,7.09739 -3.09817,13.32798 -3.09817,13.32798 0,0 28.41479,19.28359 38.46923,21.50492 10.05443,2.22133 27.25225,6.11782 27.25225,6.11782 0,0 6.12097,-5.52638 6.35479,-9.85212 0.23382,-4.32574 -0.0915,-9.86316 -0.0915,-9.86316 -15.67177,-4.92449 -27.5919,-5.77173 -38.60639,-8.37512 -22.62173,-5.38965 -30.28022,-12.86032 -30.28022,-12.86032 z"
        id="path3770"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccscsccc" />
+       sodipodi:nodetypes="ccscsccc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        style="fill:url(#linearGradient3885);fill-opacity:1;stroke:none;display:inline"
        d="m 114.42511,337.39949 c -1.40294,3.39045 -1.65865,10.77252 -0.84027,12.40929 0.81838,1.63677 10.639,17.5368 16.71842,23.03167 6.07943,5.49487 20.92725,16.95224 23.96697,18.58901 3.03971,1.63677 27.47432,14.14636 30.28021,14.84783 2.80589,0.70147 8.18384,2.10442 9.58679,1.87059 1.40294,-0.23382 4.20883,-1.63677 5.37795,-2.80589 1.16912,-1.16912 1.82804,-2.15041 2.88025,-4.83938 1.05221,-2.68898 -0.0578,-8.16858 -3.62427,-15.31548 -3.69422,-7.40299 -12.83927,-21.63359 -16.20823,-22.98567 -7.75908,-3.11399 -25.0966,-5.15731 -33.89517,-7.94516 -10.51182,-3.33068 -22.98282,-10.21247 -30.71462,-15.56591 -2.2295,-1.54368 -3.52803,-1.2909 -3.52803,-1.2909 z"
        id="path3772"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csssssssssssc" />
+       sodipodi:nodetypes="csssssssssssc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -420,7 +594,10 @@
        sodipodi:rx="29.013771"
        sodipodi:ry="30.916313"
        d="m 171.70444,200.24258 c 0,17.07461 -12.9899,30.91632 -29.01377,30.91632 -16.02386,0 -29.01377,-13.84171 -29.01377,-30.91632 0,-17.0746 12.98991,-30.91631 29.01377,-30.91631 16.02387,0 29.01377,13.84171 29.01377,30.91631 z"
-       transform="matrix(0.9439995,-0.19730682,0.21808842,1.198548,-76.576431,39.862491)" />
+       transform="matrix(0.9439995,-0.19730682,0.21808842,1.198548,-76.576431,39.862491)"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        transform="matrix(0.31028708,-0.06485359,0.07168438,0.39395569,43.164744,182.0763)"
        d="m 171.70444,200.24258 c 0,17.07461 -12.9899,30.91632 -29.01377,30.91632 -16.02386,0 -29.01377,-13.84171 -29.01377,-30.91632 0,-17.0746 12.98991,-30.91631 29.01377,-30.91631 16.02387,0 29.01377,13.84171 29.01377,30.91631 z"
@@ -429,8 +606,11 @@
        sodipodi:cy="200.24258"
        sodipodi:cx="142.69067"
        id="path3826"
-       style="fill:url(#radialGradient3834);fill-opacity:1;stroke:none"
-       sodipodi:type="arc" />
+       style="fill:url(#radialGradient3834);fill-opacity:1;stroke:none;opacity:0.96"
+       sodipodi:type="arc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        transform="matrix(0.4691927,0.15606189,-0.03187319,0.26780893,102.85737,301.6702)"
        d="m 171.70444,200.24258 c 0,17.07461 -12.9899,30.91632 -29.01377,30.91632 -16.02386,0 -29.01377,-13.84171 -29.01377,-30.91632 0,-17.0746 12.98991,-30.91631 29.01377,-30.91631 16.02387,0 29.01377,13.84171 29.01377,30.91631 z"
@@ -440,7 +620,10 @@
        sodipodi:cx="142.69067"
        id="path3844"
        style="fill:url(#radialGradient3848);fill-opacity:1;stroke:none"
-       sodipodi:type="arc" />
+       sodipodi:type="arc"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        sodipodi:type="arc"
        style="fill:url(#radialGradient3850);fill-opacity:1;stroke:none"
@@ -450,6 +633,30 @@
        sodipodi:rx="29.013771"
        sodipodi:ry="30.916313"
        d="m 171.70444,200.24258 c 0,17.07461 -12.9899,30.91632 -29.01377,30.91632 -16.02386,0 -29.01377,-13.84171 -29.01377,-30.91632 0,-17.0746 12.98991,-30.91631 29.01377,-30.91631 16.02387,0 29.01377,13.84171 29.01377,30.91631 z"
-       transform="matrix(0.15140575,0.05691716,-0.01417514,0.07711524,145.07205,354.79503)" />
+       transform="matrix(0.15140575,0.05691716,-0.01417514,0.07711524,145.07205,354.79503)"
+       inkscape:export-filename="C:\Users\Stuart\Documents\GitHub\stepdub\text3050.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="text"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-size:147.40553284px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3845);fill-opacity:1;stroke:none;font-family:Racing Sans One;-inkscape-font-specification:Racing Sans One"
+       x="367.15579"
+       y="330.51553"
+       id="text3050"
+       sodipodi:linespacing="125%"
+       transform="translate(-53.529389,-152.17385)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3052"
+         x="367.15579"
+         y="330.51553"
+         style="fill:url(#linearGradient3845);fill-opacity:1">StepDub</tspan></text>
   </g>
 </svg>
