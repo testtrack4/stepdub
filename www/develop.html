@@ -30,8 +30,8 @@
       var mal = magAvgListener();
       function sproing(){
         mal.setCb(stepDubber('sounds/boing.mp3',{
-          minJerk: parseInt(document.getElementById('jerky').value,10),
-          maxCalm: parseInt(document.getElementById('resty').value,10),
+          minJerk: parseFloat(document.getElementById('jerky').value),
+          maxCalm: parseFloat(document.getElementById('resty').value),
           calmFrames: parseInt(document.getElementById('calmness').value,10)
         }));
       }
