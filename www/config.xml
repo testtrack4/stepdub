@@ -56,6 +56,10 @@
     <icon src="icon.png" />
     <!-- Blackberry are chumps who can't handle icons larger than 16k -->
     <icon src="icon_small.png" gap:platform="blackberry" />
+
+    <!-- Define app splash screen for each platform. -->
+    <gap:splash src="splash.png" />
+
     <!--
         Define access to external domains.
 
