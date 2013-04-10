@@ -20,9 +20,9 @@ function playSound(filename){
 
 function stepDubber(filename,options){
   options = options || {};
-  var minJerk = options.minJerk || 5;
+  var minJerk = options.minJerk || 2;
   var maxCalm = options.maxCalm || 1;
-  var calmFrames = options.calmFrames || 3;
+  var calmFrames = options.calmFrames || 2;
 
   var state;
 
