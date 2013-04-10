@@ -34,9 +34,15 @@
           minJerk: parseFloat(document.getElementById('jerky').value),
           maxCalm: parseFloat(document.getElementById('resty').value),
           debugcb: function(vars){
+            function str(num){
+              var s = num.toFixed(2);
+              if (s[0] != '-') s = '+'+ s;
+              return s;
+            }
             document.getElementById('valuereport').textContent =
-              'Gmag: ' +vars.gmag + 'Delt: '+vars.delta + 'Prev: '+vars.prev;
-            document.getElementById('statefunc').textContent = vars.state;
+              'Gmag: ' + str(vars.gmag) + ' Delt: '+ str(vars.delta) +
+                ' Prev: '+ str(vars.previous);
+            document.getElementById('statefunc').textContent = vars.state.name;
           }
         }));
       }
