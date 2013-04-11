@@ -42,17 +42,20 @@
         <li><a href="http://openclipart.org/detail/13903/black-hare-by-johnny_automatic" target="_blank">black hare by johnny_automatic / Jay Van Everen</a></li>
       </ul>
     </p>
-    <footer></footer>
+    <footer>
+      <a href="http://stuartpb.com" id="coda"><img src="stuhat.svg"></a></footer>
     <script>
       var buf = '!';
       function code(char) {
         if(buf){
           buf = (buf + char).slice(-8);
           if(buf == 'spbdebut'){
-            var kapow = document.createElement('a');
+            var kapow = document.getElementById('coda');
             kapow.href='develop.html';
-            kapow.innerHTML = '<img src="shoes/spring.svg" style="width: 64px; -webkit-transform: rotate(180deg);">';
-            document.getElementsByTagName('footer')[0].appendChild(kapow);
+            kapow.style.webkitTransform = "rotate(180deg)";
+            kapow.style.mozTransform = "rotate(180deg)";
+            kapow.style.msTransform = "rotate(180deg)";
+            kapow.style.transform = "rotate(180deg)";
             buf = null;
           }
         }
