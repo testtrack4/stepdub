@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-    <svg class="chart" id="accelgraph" preserveAspectRatio="none"></svg>
+    <svg class="chart" id="accelgraph" preserveAspectRatio="none" viewBox=""></svg>
     <h1 id="appname">StepDub</h1>
     </header>
     <h2 id="active-label" class="banner">Ninja Clan Foot Stealth</h1>
@@ -22,25 +22,38 @@
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="scripts/prep.js"></script>
     <script type="text/javascript" src="scripts/functions.js"></script>
+    <script type="text/javascript" src="scripts/charting.js"></script>
     <script>
-      /*global magAvgListener stepDubber*/
+      /*global magAvgListener stepDubber chartable*/
 
       "use strict";
       var mal = magAvgListener();
+      var chartp = chartable(document.getElementById("accelgraph"));
+      var stateColors = {
+        ready: "green",
+        primed: "white",
+        rebound: "yellow",
+        comedown: "cyan"
+      };
+
+      function chartState(params){
+        chartp(params.mag,'stroke:'+stateColors[params.state]);
+      }
+
       var primedSpring = stepDubber('sounds/boing.mp3');
       var primedBoom = stepDubber('sounds/boom.mp3');
 
       function shhhhhh(){
         document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
-        mal.setCb(null);
+        mal.setCb(function(mag){chartp(mag,"stroke: gray")});
       }
       function sproing(){
         document.getElementById("active-label").textContent = "Spring In Your Step";
-        mal.setCb(primedSpring);
+        mal.setCb(primedSpring,{debugCb: chartState});
       }
       function rooooar(){
         document.getElementById("active-label").textContent = "Big Boom";
-        mal.setCb(primedBoom);
+        mal.setCb(primedBoom,{debugCb: chartState});
       }
     </script>
   </body>
