@@ -1,4 +1,5 @@
 function chartable(svg, opts){
+  opts = opts || {};
   var samples = opts.samples !== undefined ? opts.samples : 300;
   //TODO: Modernizr check for SVG animation &&'ed to the beginning
   var frameSec = opts.frameSec !== undefined ? opts.frameSec : 1/40;
