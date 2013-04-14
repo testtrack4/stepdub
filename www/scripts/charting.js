@@ -10,6 +10,9 @@ function chartable(svg, opts){
   var frame = samples+1;
   var segments = [];
   var values = [];
+  var initViewBox = '1 ' + (-baseTop) + ' ' +samples+' '+ (baseTop-baseBottom);
+
+  svg.setAttribute("viewBox",initViewBox);
 
   for (var i = 0; i <= samples; i++){
     segments[i] = document.createElementNS(
@@ -24,6 +27,7 @@ function chartable(svg, opts){
   }
 
   var anim;
+
   if(frameSec) {
     anim = document.createElementNS(
       'http://www.w3.org/2000/svg', 'animate');
@@ -38,11 +42,12 @@ function chartable(svg, opts){
   function pan(){
     var top = -Math.max(Math.max.apply(null,values),baseTop);
     var bottom = -Math.min(Math.min.apply(null,values), baseBottom);
-    var newViewBox = frame-samples + ' ' + top + ' ' + samples + ' '+ (-(top-bottom));
+    var newViewBox = frame-samples + ' ' + top + ' ' +
+      samples + ' ' + (-(top-bottom));
     if(frameSec) {
       var oldViewBox = anim.getAttribute('to');
       anim.setAttribute('to', newViewBox);
-      if(oldViewBox) anim.setAttribute('from', oldViewBox);
+      anim.setAttribute('from', oldViewBox || initViewBox);
       anim.beginElement();
     } else {
       svg.setAttribute("viewBox",newViewBox);
