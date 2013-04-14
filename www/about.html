@@ -43,7 +43,7 @@
       </ul>
     </p>
     <footer>
-      <a href="http://stuartpb.com" id="coda"><img src="stuhat.svg"></a></footer>
+      <a href="http://stuartpb.com" id="coda" style="display: inline-block;"><img src="stuhat.svg"></a></footer>
     <script>
       var buf = '!';
       function code(char) {
@@ -52,8 +52,8 @@
           if(buf == 'spbdebut'){
             var kapow = document.getElementById('coda');
             kapow.href='develop.html';
-            kapow.style.webkitTransform = "rotate(180deg)";
-            kapow.style.mozTransform = "rotate(180deg)";
+            kapow.style.WebkitTransform = "rotate(180deg)";
+            kapow.style.MozTransform = "rotate(180deg)";
             kapow.style.msTransform = "rotate(180deg)";
             kapow.style.transform = "rotate(180deg)";
             buf = null;
@@ -61,6 +61,6 @@
         }
       }
     </script>
-    <script src="prep.js"></script>
+    <script src="scripts/prep.js"></script>
   </body>
 </html>
