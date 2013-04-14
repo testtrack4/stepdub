@@ -29,8 +29,13 @@ body {
   user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
+img {
+  vertical-align: text-bottom;
+}
+
 header {
-  margin: 0 1rem;
+  position: relative;
+  height: 3em;
 }
 
 footer {
@@ -45,6 +50,22 @@ h1, h2 {
 h1 {
   text-align: left;
   font-size: 2em;
+}
+
+.chart {
+  background-color: black;
+}
+
+header .chart {
+  position: absolute;
+  height: 3em;
+  width: 100%;
+}
+
+header h1 {
+  color: white;
+  position: absolute;
+  left: 1rem;
 }
 
 h2 {
