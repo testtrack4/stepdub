@@ -52,9 +52,8 @@ function chartable(svg, opts){
       anim.setAttribute('to', newViewBox);
       anim.setAttribute('from', oldViewBox || initViewBox);
       anim.beginElement();
-    } else {
-      svg.setAttribute("viewBox",newViewBox);
     }
+    svg.setAttribute("viewBox",newViewBox);
   }
 
   function addPoint(y,style){
