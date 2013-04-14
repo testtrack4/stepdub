@@ -35,6 +35,7 @@ function stepDubber(filename,options) {
     previous = gmag;
     if(debugcb) debugcb({
       state: state,
+      mag: mag,
       gmag: gmag,
       delta: delta,
       previous: previous
