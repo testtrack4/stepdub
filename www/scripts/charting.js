@@ -56,11 +56,10 @@ function chartable(svg, opts){
 
   function addPoint(y,style){
     if(values.length){
-      var path = segments.shift();
-      path.setAttribute('d',"M "+(frame+samples)+' '+(-values[values.length-1])+
-        ' L '+(frame+samples+1)+' '+(-y));
-      segments.push(path);
-      values.push(y); values.shift();
+      var path = segments[(frame-1)%(samples+2)];
+      path.setAttribute('d',"M "+(frame+samples+1)+' '+(-values[(frame-1)%(samples+2)])+
+        ' L '+(frame+samples+2)+' '+(-y));
+      values[frame%(samples+2)]=y;
       frame++;
       pan();
     } else { //late initialization for the non-initY case
