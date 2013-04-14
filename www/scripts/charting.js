@@ -1,8 +1,10 @@
+/*global Modernizr*/
+
 function chartable(svg, opts){
   opts = opts || {};
   var samples = opts.samples !== undefined ? opts.samples : 300;
-  //TODO: Modernizr check for SVG animation &&'ed to the beginning
-  var frameSec = opts.frameSec !== undefined ? opts.frameSec : 1/40;
+  var frameSec = Modernizr.smil &&
+    (opts.frameSec !== undefined ? opts.frameSec : 1/40);
   var initY = opts.initY !== undefined ? opts.initY : 10;
   var defStyle = opts.defStyle !== undefined ? opts.defStyle : "stroke: green";
   var baseTop = opts.baseTop !== undefined ? opts.baseTop : 20;
@@ -60,7 +62,7 @@ function chartable(svg, opts){
       var path = segments[(frame-1)%(samples+2)];
       path.setAttribute('d',"M "+(frame+samples+1)+' '+(-values[(frame-1)%(samples+2)])+
         ' L '+(frame+samples+2)+' '+(-y));
-      path.setAttribute('style',style === undefined ? defStyle : style)
+      path.setAttribute('style',style === undefined ? defStyle : style);
       values[frame%(samples+2)]=y;
       frame++;
       pan();
