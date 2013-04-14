@@ -56,6 +56,12 @@ h1 {
   background-color: black;
 }
 
+.chart path {
+  stroke-width:2px;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
 header .chart {
   position: absolute;
   height: 3em;
