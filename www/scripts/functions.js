@@ -22,19 +22,19 @@ function stepDubber(filename,options) {
   options = options || {};
   var minJerk = options.minJerk || 2;
   var maxCalm = options.maxCalm || 1;
-  var debugcb = options.debugcb;
+  var cb = options.cb;
 
   var delta = 1, previous = 0;
 
   var state;
 
   function machine(mag, gravity){
-    var gmag = mag-gravity;
+    var gmag = mag - gravity;
     state(gmag);
     delta = gmag - previous;
     previous = gmag;
-    if(debugcb) debugcb({
-      state: state,
+    if(cb) cb({
+      state: state.name,
       mag: mag,
       gmag: gmag,
       delta: delta,

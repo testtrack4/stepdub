@@ -60,6 +60,7 @@ function chartable(svg, opts){
       var path = segments[(frame-1)%(samples+2)];
       path.setAttribute('d',"M "+(frame+samples+1)+' '+(-values[(frame-1)%(samples+2)])+
         ' L '+(frame+samples+2)+' '+(-y));
+      path.setAttribute('style',style === undefined ? defStyle : style)
       values[frame%(samples+2)]=y;
       frame++;
       pan();

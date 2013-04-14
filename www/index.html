@@ -40,8 +40,8 @@
         chartp(params.mag,'stroke:'+stateColors[params.state]);
       }
 
-      var primedSpring = stepDubber('sounds/boing.mp3');
-      var primedBoom = stepDubber('sounds/boom.mp3');
+      var primedSpring = stepDubber('sounds/boing.mp3',{cb: chartState});
+      var primedBoom = stepDubber('sounds/boom.mp3',{cb: chartState});
 
       function shhhhhh(){
         document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
@@ -49,11 +49,11 @@
       }
       function sproing(){
         document.getElementById("active-label").textContent = "Spring In Your Step";
-        mal.setCb(primedSpring,{debugCb: chartState});
+        mal.setCb(primedSpring);
       }
       function rooooar(){
         document.getElementById("active-label").textContent = "Big Boom";
-        mal.setCb(primedBoom,{debugCb: chartState});
+        mal.setCb(primedBoom);
       }
     </script>
   </body>
