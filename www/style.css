@@ -52,6 +52,12 @@ h1 {
   font-size: 2em;
 }
 
+h1 img {
+  height: 2rem;
+  vertical-align: middle;
+}
+
+
 .chart {
   background-color: black;
 }
