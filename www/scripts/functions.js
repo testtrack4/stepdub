@@ -66,7 +66,7 @@ function stepDubber(filename,options) {
   }
 
   function comedown(gmag) {
-    if (Math.abs(gmag) < maxCalm) {
+    if (Math.abs(gmag) < minJerk) {
       state = ready;
     }
   }
