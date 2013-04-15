@@ -28,13 +28,20 @@
 
       "use strict";
       var mal = magAvgListener();
-      var chartp = chartable(document.getElementById("accelgraph"),{frameSec:0});
+      var chartp = chartable(document.getElementById("accelgraph"),
+        {frameSec: 0, defStyle: 'stroke:gray'});
       var stateColors = {
         ready: "green",
         primed: "white",
         rebound: "yellow",
         comedown: "gray"
       };
+
+      function chartSilence(mag) {
+        chartp(mag,"stroke: gray");
+      }
+
+      mal.setCb(chartSilence);
 
       function chartState(params){
         chartp(params.mag,'stroke:'+stateColors[params.state]);
@@ -45,7 +52,7 @@
 
       function shhhhhh(){
         document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
-        mal.setCb(function(mag){chartp(mag,"stroke: gray")});
+        mal.setCb(chartSilence);
       }
       function sproing(){
         document.getElementById("active-label").textContent = "Spring In Your Step";
