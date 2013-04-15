@@ -82,8 +82,8 @@
         };
       }
 
-      var primedSpring = stepDubber('sounds/boing.mp3',{cb: chartState});
-      var primedBoom = stepDubber('sounds/boom.mp3',{cb: chartState});
+      var primedSpring = stepDubber('sounds/boing.mp3',{cb: chartState()});
+      var primedBoom = stepDubber('sounds/boom.mp3',{cb: chartState()});
 
       function shhhhhh(){
         document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
