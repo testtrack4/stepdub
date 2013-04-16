@@ -62,7 +62,7 @@ function stepDubber(filename,options) {
     //if the current delta is opposite the previous delta
     if (kickBack > 0 ? gmag > 0 : gmag < 0) {
       //we've hit the equal and opposite reaction
-      state = comedown;
+      state = ready; ready(gmag);
       kickBack = gmag > 0 ? -maxCalm : maxCalm;
     }
   }
