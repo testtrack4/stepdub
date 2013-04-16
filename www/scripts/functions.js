@@ -25,7 +25,7 @@ function stepDubber(filename,options) {
   var cb = options.cb;
 
   var delta = 1, previous = 0;
-
+  var kickBack;
   var state;
 
   function machine(mag, gravity){
@@ -45,28 +45,30 @@ function stepDubber(filename,options) {
   function ready(gmag) {
     if(Math.abs(gmag) > minJerk){
       state = primed;
+      kickBack = gmag > 0 ? -maxCalm : maxCalm;
     }
   }
 
   function primed(gmag) {
-    //if the current delta is opposite the previous delta
-    if (gmag - previous < 0 != delta < 0 ) {
+    if (kickBack > 0 ? gmag > kickBack : gmag < kickBack) {
       //we've hit the peak
       playSound(filename);
       state = rebound;
+      kickBack = gmag > 0 ? -maxCalm : maxCalm;
     }
   }
 
   function rebound(gmag) {
     //if the current delta is opposite the previous delta
-    if (gmag - previous < 0 != delta < 0 ) {
+    if (kickBack > 0 ? gmag > kickBack : gmag < kickBack) {
       //we've hit the equal and opposite reaction
       state = comedown;
+      kickBack = gmag > 0 ? -maxCalm : maxCalm;
     }
   }
 
   function comedown(gmag) {
-    if (Math.abs(gmag) < minJerk) {
+    if (kickBack > 0 ? gmag > kickBack : gmag < kickBack) {
       state = ready;
     }
   }
