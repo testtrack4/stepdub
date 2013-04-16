@@ -50,7 +50,7 @@ function stepDubber(filename,options) {
   }
 
   function primed(gmag) {
-    if (kickBack > 0 ? gmag > kickBack : gmag < kickBack) {
+    if (kickBack > 0 ? gmag > 0 : gmag < 0) {
       //we've hit the peak
       playSound(filename);
       state = rebound;
@@ -60,7 +60,7 @@ function stepDubber(filename,options) {
 
   function rebound(gmag) {
     //if the current delta is opposite the previous delta
-    if (kickBack > 0 ? gmag > kickBack : gmag < kickBack) {
+    if (kickBack > 0 ? gmag > 0 : gmag < 0) {
       //we've hit the equal and opposite reaction
       state = comedown;
       kickBack = gmag > 0 ? -maxCalm : maxCalm;
@@ -68,7 +68,7 @@ function stepDubber(filename,options) {
   }
 
   function comedown(gmag) {
-    if (kickBack > 0 ? gmag > kickBack : gmag < kickBack) {
+    if (kickBack > 0 ? gmag > 0 : gmag < 0) {
       state = ready;
     }
   }
