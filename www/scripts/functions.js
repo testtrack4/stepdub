@@ -70,6 +70,7 @@ function stepDubber(filename,options) {
   function comedown(gmag) {
     if (kickBack > 0 ? gmag > 0 : gmag < 0) {
       state = ready;
+      ready(gmag);
     }
   }
 
