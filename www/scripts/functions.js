@@ -50,7 +50,7 @@ function stepDubber(filename,options) {
 
   function primed(gmag) {
     //if the current delta is opposite the previous delta
-    if (gmag - previous < 0 == delta < 0 ) {
+    if (gmag - previous < 0 != delta < 0 ) {
       //we've hit the peak
       playSound(filename);
       state = rebound;
@@ -59,7 +59,7 @@ function stepDubber(filename,options) {
 
   function rebound(gmag) {
     //if the current delta is opposite the previous delta
-    if (gmag - previous < 0 == delta < 0 ) {
+    if (gmag - previous < 0 != delta < 0 ) {
       //we've hit the equal and opposite reaction
       state = comedown;
     }
