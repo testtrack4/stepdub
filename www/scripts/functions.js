@@ -18,66 +18,6 @@ function playSound(filename) {
   sound.play();
 }
 
-function stepDubber(filename,options) {
-  options = options || {};
-  var minJerk = options.minJerk || 4;
-  var maxCalm = options.maxCalm || 1;
-  var cb = options.cb;
-
-  var delta = 1, previous = 0;
-  var kickBack;
-  var state;
-
-  function machine(mag, gravity){
-    var gmag = mag - gravity;
-    state(gmag);
-    delta = gmag - previous;
-    previous = gmag;
-    if(cb) cb({
-      state: state.name,
-      mag: mag,
-      gmag: gmag,
-      delta: delta,
-      previous: previous
-    });
-  }
-
-  function ready(gmag) {
-    if(Math.abs(gmag) > minJerk){
-      state = primed;
-      kickBack = gmag > 0 ? -maxCalm : maxCalm;
-    }
-  }
-
-  function primed(gmag) {
-    if (kickBack > 0 ? gmag > 0 : gmag < 0) {
-      //we've hit the peak
-      playSound(filename);
-      state = rebound;
-      kickBack = gmag > 0 ? -maxCalm : maxCalm;
-    }
-  }
-
-  function rebound(gmag) {
-    //if the current delta is opposite the previous delta
-    if (kickBack > 0 ? gmag > 0 : gmag < 0) {
-      //we've hit the equal and opposite reaction
-      state = ready; ready(gmag);
-      kickBack = gmag > 0 ? -maxCalm : maxCalm;
-    }
-  }
-
-  function comedown(gmag) {
-    if (kickBack > 0 ? gmag > 0 : gmag < 0) {
-      state = ready;
-      ready(gmag);
-    }
-  }
-
-  state = ready;
-  return machine;
-}
-
 function magAvgListener(options) {
   var max = Math.max,
       min = Math.min,
@@ -140,4 +80,30 @@ function magAvgListener(options) {
   });
 
   return dis;
+}
+
+
+function stepMachine(states, trigger, poll, options) {
+  options = options || {};
+  var minJerk = options.minJerk || 4;
+
+  var flipSide;
+  var state = 0;
+
+  return function machine(mag, gravity){
+    var gmag = mag - gravity;
+    if(state == 0) {
+      if(Math.abs(gmag) > minJerk){
+        state = 1;
+        flipSide = gmag;
+        trigger && trigger(gmag,state);
+      }
+    } else if(flipSide > 0 != gmag > 0) {
+      state++;
+      if (state == states) state = 0;
+      flipSide = gmag;
+      trigger && trigger(gmag,state);
+    }
+    poll && poll(gmag,state);
+  };
 }

@@ -13,12 +13,7 @@
     <h1 id="appname"><img src="headline.svg" alt="StepDub"></h1>
     </header>
     <h2 id="active-label" class="banner">Ninja Clan Foot Stealth</h1>
-    <div class="buttons">
-      <img class="shoe-button" src="shoes/ninja.svg" onclick="shhhhhh()">
-      <img class="shoe-button" src="shoes/spring.svg" onclick="sproing()">
-      <img class="shoe-button" src="shoes/gargantuan.svg" onclick="rooooar()">
-      <img class="shoe-button" src="shoes/wetsock.svg" onclick="splattt()">
-    </div>
+    <div id="buttons"></div>
     <footer>
     <svg width="100%" height="100px" viewBox="0 0 640 100" xmlns="http://www.w3.org/2000/svg">
      <defs>
@@ -56,7 +51,8 @@
     <script type="text/javascript" src="scripts/functions.js"></script>
     <script type="text/javascript" src="scripts/charting.js"></script>
     <script>
-      /*global magAvgListener stepDubber chartable*/
+
+      /*global stepMachine playSound chartable*/
 
       "use strict";
       var mal = magAvgListener();
@@ -69,40 +65,44 @@
 
       mal.setCb(chartSilence);
 
-      function chartState(){
-        var stateColors = {
-          ready: "green",
-          primed: "white",
-          rebound: "yellow",
-          comedown: "gray"
-        };
-        var styleStarting = 'stroke:'+stateColors.ready;
-        return function chartCb (params){
-          chartp(params.mag,styleStarting);
-          styleStarting = 'stroke:'+stateColors[params.state];
-        };
+      var stateColors = [ "green", "white", "yellow" ];
+      var styleInto = 'stroke:'+stateColors[0];
+      function chartState (mag, state){
+        chartp(mag,styleInto);
+        styleInto = 'stroke:'+stateColors[state];
       }
 
-      var primedSpring = stepDubber('sounds/boing.mp3',{cb: chartState()});
-      var primedBoom = stepDubber('sounds/boom.mp3',{cb: chartState()});
-      var primedSplat = stepDubber('sounds/splat.mp3',{cb: chartState()});
+      function soundTrigger(soundFilename) {
+        return function(mag, state){
+          if(state==2) playSound(soundFilename);};
+      }
 
-      function shhhhhh(){
-        document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
-        mal.setCb(chartSilence);
+      var activeShoe;
+      function addShoe(image,label,trigger,poll){
+        var button = document.createElement("img");
+        var machine = stepMachine(3,trigger,poll);
+        button.src = image;
+        button.className = "shoe-button";
+        button.addEventListener("click",function(evt){
+          document.getElementById("active-label").textContent = label;
+          activeShoe.classList.remove('active');
+          activeShoe = button;
+          activeShoe.classList.add('active');
+          mal.setCb(machine);
+        });
+        document.getElementById("buttons").appendChild(button);
+        return button;
       }
-      function sproing(){
-        document.getElementById("active-label").textContent = "Spring In Your Step";
-        mal.setCb(primedSpring);
-      }
-      function rooooar(){
-        document.getElementById("active-label").textContent = "Big Boom";
-        mal.setCb(primedBoom);
-      }
-      function splattt(){
-        document.getElementById("active-label").textContent = "Squish Socks";
-        mal.setCb(primedSplat);
-      }
+
+      activeShoe = addShoe("shoes/ninja.svg","Ninja Clan Foot Stealth",
+        null,null);
+      activeShoe.classList.add("active");
+      addShoe("shoes/spring.svg","Spring In Your Step",
+        soundTrigger('sounds/boing.mp3'),chartState);
+      addShoe("shoes/gargantuan.svg","Big Boom",
+        'sounds/boom.mp3',chartState);
+      addShoe("shoes/wetsock.svg","Squish Socks",
+        'sounds/splat.mp3',chartState);
     </script>
   </body>
 </html>

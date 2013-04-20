@@ -99,7 +99,7 @@ input {
   user-select: auto;
 }
 
-.buttons {
+#buttons {
   margin: 16px 8px;
   font-size: 0;
   text-align: center;
