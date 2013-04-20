@@ -93,7 +93,7 @@ function stepMachine(states, trigger, poll, options) {
   return function machine(mag, gravity){
     var gmag = mag - gravity;
     if(state == 0) {
-      if(Math.abs(gmag) > minJerk){
+      if(gmag > minJerk){
         state = 1;
         flipSide = gmag;
         trigger && trigger(gmag,state);
