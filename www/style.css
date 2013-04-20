@@ -100,13 +100,18 @@ input {
 }
 
 .buttons {
-  margin: 16px;
+  margin: 16px 8px;
+  font-size: 0;
   text-align: center;
 }
 
 .shoe-button {
-  height: 64px;
-  width: 64px;
-  margin: 8px;
+  width: 18%;
+  padding: 2%;
+  margin: 1.5%;
 }
 
+.shoe-button.active {
+  outline: 4px solid gold;
+  border-radius: 8px;
+}
