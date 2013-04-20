@@ -17,6 +17,7 @@
       <img class="shoe-button" src="shoes/ninja.svg" onclick="shhhhhh()">
       <img class="shoe-button" src="shoes/spring.svg" onclick="sproing()">
       <img class="shoe-button" src="shoes/gargantuan.svg" onclick="rooooar()">
+      <img class="shoe-button" src="shoes/wetsock.svg" onclick="splattt()">
     </div>
     <footer>
     <svg width="100%" height="100px" viewBox="0 0 640 100" xmlns="http://www.w3.org/2000/svg">
@@ -84,6 +85,7 @@
 
       var primedSpring = stepDubber('sounds/boing.mp3',{cb: chartState()});
       var primedBoom = stepDubber('sounds/boom.mp3',{cb: chartState()});
+      var primedSplat = stepDubber('sounds/splat.mp3',{cb: chartState()});
 
       function shhhhhh(){
         document.getElementById("active-label").textContent = "Ninja Clan Foot Stealth";
@@ -96,6 +98,10 @@
       function rooooar(){
         document.getElementById("active-label").textContent = "Big Boom";
         mal.setCb(primedBoom);
+      }
+      function splattt(){
+        document.getElementById("active-label").textContent = "Squish Socks";
+        mal.setCb(primedSplat);
       }
     </script>
   </body>
