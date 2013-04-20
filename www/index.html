@@ -59,11 +59,11 @@
       var chartp = chartable(document.getElementById("accelgraph"),
         {frameSec: 0, defStyle: 'stroke:gray'});
 
-      function chartSilence(mag) {
+      function chartSilence(mag,grav) {
         chartp(mag,"stroke: gray");
       }
 
-      mal.setCb(chartSilence);
+      mal.setCb(function(mag,grav){chartp(mag-grav,"stroke: gray");});
 
       var stateColors = [ "green", "white", "yellow" ];
       var styleInto = 'stroke:'+stateColors[0];
