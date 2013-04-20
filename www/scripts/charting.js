@@ -5,10 +5,10 @@ function chartable(svg, opts){
   var samples = opts.samples !== undefined ? opts.samples : 300;
   var frameSec = Modernizr.smil &&
     (opts.frameSec !== undefined ? opts.frameSec : 1/40);
-  var initY = opts.initY !== undefined ? opts.initY : 10;
+  var initY = opts.initY !== undefined ? opts.initY : 0;
   var defStyle = opts.defStyle !== undefined ? opts.defStyle : "stroke: green";
-  var baseTop = opts.baseTop !== undefined ? opts.baseTop : 20;
-  var baseBottom = opts.baseBottom !== undefined ? opts.baseBottom : 0;
+  var baseTop = opts.baseTop !== undefined ? opts.baseTop : 10;
+  var baseBottom = opts.baseBottom !== undefined ? opts.baseBottom : -10;
 
   var frame = 1;
   var segments = [];
