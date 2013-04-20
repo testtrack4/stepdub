@@ -77,6 +77,12 @@
           if(state==2) playSound(soundFilename);};
       }
 
+      function doubleSounder(upSound,downSound) {
+        return function(mag, state){
+          if(state==2) playSound(upSound);
+          else if(state==0) playSound(downSound);};
+      }
+
       var activeShoe;
       function addShoe(image,label,trigger,poll){
         var button = document.createElement("img");
@@ -103,6 +109,8 @@
         soundTrigger('sounds/boom.mp3'),chartState);
       addShoe("shoes/wetsock.svg","Squish Socks",
         soundTrigger('sounds/splat.mp3'),chartState);
+      addShoe("shoes/steamplatform.svg","Steam Pumped Up Kicks",
+        doubleSounder('sounds/punk.mp3','sounds/steam.mp3'),chartState);
     </script>
   </body>
 </html>
