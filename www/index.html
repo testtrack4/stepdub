@@ -77,10 +77,21 @@
           if(state==2) playSound(soundFilename);};
       }
 
+      function soundTrigger2(soundFilename) {
+        return function(mag, state){
+          if(state==1) playSound(soundFilename);};
+      }
+
       function doubleSounder(upSound,downSound) {
         return function(mag, state){
           if(state==2) playSound(upSound);
           else if(state==0) playSound(downSound);};
+      }
+
+      function doubleSounder2(upSound,downSound) {
+        return function(mag, state){
+          if(state==1) playSound(upSound);
+          else if(state==2) playSound(downSound);};
       }
 
       var activeShoe;
@@ -105,14 +116,20 @@
       activeShoe.classList.add("active");
       addShoe("shoes/spring.svg","Spring In Your Step",
         soundTrigger('sounds/boing.mp3'),chartState);
+      addShoe("shoes/spring.svg","Spring In Your Step",
+        soundTrigger2('sounds/boing.mp3'),chartState);
       addShoe("shoes/gargantuan.svg","Big Boom",
         soundTrigger('sounds/boom.mp3'),chartState);
+      addShoe("shoes/gargantuan.svg","Big Boom",
+        soundTrigger2('sounds/boom.mp3'),chartState);
       addShoe("shoes/wetsock.svg","Squish Socks",
         soundTrigger('sounds/splat.mp3'),chartState);
+      addShoe("shoes/wetsock.svg","Squish Socks",
+        soundTrigger2('sounds/splat.mp3'),chartState);
       addShoe("shoes/steamplatform.svg","Steam Pumped Up Kicks",
         doubleSounder('sounds/punk.mp3','sounds/steam.mp3'),chartState);
       addShoe("shoes/halfsteam.svg","One-Stroke Steam Engine",
-        soundTrigger('sounds/poothiss.mp3'),chartState);
+        doubleSounder2('sounds/punk.mp3','sounds/steam.mp3'),chartState);
     </script>
   </body>
 </html>
