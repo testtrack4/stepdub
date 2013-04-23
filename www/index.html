@@ -51,7 +51,6 @@
     <script type="text/javascript" src="scripts/functions.js"></script>
     <script type="text/javascript" src="scripts/charting.js"></script>
     <script>
-
       /*global stepMachine playSound chartable*/
 
       "use strict";
@@ -72,15 +71,23 @@
         styleInto = 'stroke:'+stateColors[state];
       }
 
-      function soundTrigger(soundFilename) {
+      function soundTrigger(soundName) {
         return function(mag, state){
-          if(state==1) playSound(soundFilename);};
+          if(state==1) playSound("sounds/" + soundName + '.mp3');};
       }
 
       function doubleSounder(upSound,downSound) {
         return function(mag, state){
-          if(state==1) playSound(upSound);
-          else if(state==2) playSound(downSound);};
+          if(state==1) playSound("sounds/" + upSound + '.mp3');
+          else if(state==2) playSound("sounds/" + downSound + '.mp3');};
+      }
+
+      function doubleIterator(folder,count) {
+        var position = 0;
+        return function(mag, state){
+          if(state==1 || state==2) playSound("sounds/" + folder + '/' + position + '.mp3');
+          position = (position + 1) % count;
+        };
       }
 
       var sensitivity = 4;
@@ -98,7 +105,7 @@
             if (state==2) {
               var i = sounds.length;
               while (max < sensitivity * i) i--;
-              playSound(sounds[i-1]);
+              playSound("sounds/" + sounds[i-1] + '.mp3');
               max = 0;
             }
           }
@@ -109,7 +116,7 @@
       function addShoe(image,label,trigger,poll){
         var button = document.createElement("img");
         var machine = stepMachine(3,trigger,poll);
-        button.src = image;
+        button.src = 'shoes/' + image + '.svg';
         button.className = "shoe-button";
         button.addEventListener("click",function(evt){
           document.getElementById("active-label").textContent = label;
@@ -122,23 +129,23 @@
         return button;
       }
 
-      activeShoe = addShoe("shoes/ninja.svg","Ninja Clan Foot Stealth",
+      activeShoe = addShoe("ninja","Ninja Clan Foot Stealth",
         null,chartSilence);
       activeShoe.classList.add("active");
-      addShoe("shoes/spring.svg","Spring In Your Step",
-        soundTrigger('sounds/boing.mp3'),chartState);
-      addShoe("shoes/gargantuan.svg","Big Boom",
-        soundTrigger('sounds/boom.mp3'),chartState);;
-      addShoe("shoes/wetsock.svg","Squish Socks",
-        soundTrigger('sounds/splat.mp3'),chartState);
-      addShoe("shoes/steamplatform.svg","Steam Pumped Up Kicks",
-        doubleSounder('sounds/shocks.mp3','sounds/steam.mp3'),chartState);
+      addShoe("spring","Spring In Your Step",
+        soundTrigger('boing'),chartState);
+      addShoe("gargantuan","Big Boom",
+        soundTrigger('boom'),chartState);;
+      addShoe("wetsock","Squish Socks",
+        soundTrigger('splat'),chartState);
+      addShoe("steamplatform","Steam Pumped Up Kicks",
+        doubleSounder('shocks','steam'),chartState);
       var squeaker = intenSound([
-        'sounds/squeaks/ball.mp3',
-        'sounds/squeaks/rat.mp3',
-        'sounds/squeaks/horn.mp3']);
-      addShoe("shoes/squeaky.svg","Squeaky Shoes",
+        'squeaks/ball','squeaks/rat','squeaks/horn']);
+      addShoe("squeaky","Squeaky Shoes",
         squeaker.trigger,squeaker.poll);
+      addShoe("coconuts","Coconut Hooves",
+        doubleIterator('clops',8),chartState);
     </script>
   </body>
 </html>
