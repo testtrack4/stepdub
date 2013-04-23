@@ -59,7 +59,7 @@
       var chartp = chartable(document.getElementById("accelgraph"),
         {frameSec: 0, defStyle: 'stroke:gray'});
 
-      function chartSilence(mag,grav) {
+      function chartSilence(mag,state) {
         chartp(mag,"stroke: gray");
       }
 
@@ -90,17 +90,17 @@
         return {
           poll: function(mag, state){
             if (state==1) max = Math.max(max,mag);
+            //TODO: chart the intensity of the step for
+            //the duration of state 1
+            chartState(mag,state);
           },
           trigger: function(mag, state){
             if (state==2) {
               var i = sounds.length;
               while (max < sensitivity * i) i--;
-              playSound(sounds[i]);
+              playSound(sounds[i-1]);
               max = 0;
             }
-            //TODO: chart the intensity of the step for
-            //the duration of state 1
-            chartState(mag,state);
           }
         }
       }
