@@ -52,7 +52,8 @@
     <script type="text/javascript" src="scripts/charting.js"></script>
     <script type="text/javascript" src="scripts/shoemakers.js"></script>
     <script>
-      /*global stepMachine playSound chartable*/
+      /*global magAvgListener chartable
+        chartSilence soundTrigger doubleSounder intenSound gallopIterator*/
 
       "use strict";
       var mal = magAvgListener();
@@ -88,7 +89,7 @@
       addShoe("steamplatform", "Steam Pumped Up Kicks",
         doubleSounder('shocks', 'steam'));
       addShoe("squeaky", "Squeaky Shoes",
-        intenSound(['squeaks/ball', 'squeaks/rat', 'squeaks/horn']);
+        intenSound(['squeaks/ball', 'squeaks/rat', 'squeaks/horn']));
       addShoe("coconuts", "Coconut Hooves", gallopIterator('clops', 8));
 
       if (!activeShoe) activateDefault();

@@ -1,9 +1,11 @@
+/*global chartp playSound*/
+
 //// Parameters
 
 function getParam(name, defaultValue){
-  retuen localStorage.getItem(name) === null ? defaultValue :
+  return localStorage.getItem(name) === null ? defaultValue :
     parseInt(localStorage.getItem(name), 10);
-};
+}
 
 //The minimum magnitude to trigger a sound / begin state oscillation.
 var sensitivity = getParam("bottomThreshold", 4);
@@ -18,7 +20,6 @@ var secondState = getParam("secondState", 2);
 //// State machine constructor
 
 function stepMachine(states, trigger, poll) {
-  options = options || {};
 
   var flipSide;
   var state = 0;
@@ -26,7 +27,7 @@ function stepMachine(states, trigger, poll) {
   return function machine(mag, gravity){
     var gmag = mag - gravity;
     if(state == 0) {
-      if(gmag > minJerk){
+      if(gmag > sensitivity){
         state = 1;
         flipSide = gmag;
         trigger && trigger(gmag,state);
@@ -62,7 +63,7 @@ function chartSilence(mag, grav) {
 
 function soundTrigger(soundName) {
   return stepMachine(3, function trigger(mag, state){
-    if(state == 1) playSound("sounds/" + soundName + '.mp3');};
+    if(state == 1) playSound("sounds/" + soundName + '.mp3');
   }, chartState);
 }
 
