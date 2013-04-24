@@ -59,9 +59,9 @@
       var chartp = chartable(document.getElementById("accelgraph"),
         {frameSec: 0, defStyle: 'stroke:gray'});
 
-      mal.setCb(chartSilence);
-
       var activeShoe;
+
+      var initialShoe = localStorage.getItem("initialShoe");
       function addShoe(image,label,machine){
         var button = document.createElement("img");
         button.src = 'shoes/' + image + '.svg';
@@ -72,13 +72,15 @@
           activeShoe = button;
           activeShoe.classList.add('active');
           mal.setCb(machine);
+          localStorage.setItem("initialShoe",label);
         }
+        if(label == initialShoe) activateShoe();
         button.addEventListener("click",activateShoe);
         document.getElementById("buttons").appendChild(button);
-        return button;
+        return activateShoe;
       }
 
-      var defaultShoe = addShoe("ninja",
+      var activateDefault = addShoe("ninja",
         "Ninja Clan Foot Stealth", chartSilence);
       addShoe("spring", "Spring In Your Step", soundTrigger('boing'));
       addShoe("gargantuan", "Big Boom", soundTrigger('boom'));
@@ -88,8 +90,8 @@
       addShoe("squeaky", "Squeaky Shoes",
         intenSound(['squeaks/ball', 'squeaks/rat', 'squeaks/horn']);
       addShoe("coconuts", "Coconut Hooves", gallopIterator('clops', 8));
-      if (!activeShoe) activeShoe = defaultShoe;
-      activeShoe.classList.add("active");
+
+      if (!activeShoe) activateDefault();
     </script>
   </body>
 </html>
