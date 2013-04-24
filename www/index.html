@@ -58,10 +58,10 @@
       var chartp = chartable(document.getElementById("accelgraph"),
         {frameSec: 0, defStyle: 'stroke:gray'});
 
-      var firstState = parseInt(localStorage.getItem("firstState"),10);
-      var secondState = parseInt(localStorage.getItem("secondState"),10);
-      if (firstState === NaN) firstState = 1;
-      if (secondState === NaN) secondState = 2;
+      var firstState = localStorage.getItem("firstState") === null ? 1 :
+        parseInt(localStorage.getItem("firstState"),10);
+      var secondState = localStorage.getItem("secondState") === null ? 2 :
+        parseInt(localStorage.getItem("secondState"),10);
 
       function chartSilence(mag,state) {
         chartp(mag,"stroke: gray");
