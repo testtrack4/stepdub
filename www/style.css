@@ -30,7 +30,7 @@ body {
 }
 
 img {
-  vertical-align: text-bottom;
+  vertical-align: middle;
 }
 
 header {
@@ -54,7 +54,6 @@ h1 {
 
 h1 img {
   height: 2rem;
-  vertical-align: middle;
 }
 
 
