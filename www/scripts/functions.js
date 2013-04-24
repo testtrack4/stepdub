@@ -81,29 +81,3 @@ function magAvgListener(options) {
 
   return dis;
 }
-
-
-function stepMachine(states, trigger, poll, options) {
-  options = options || {};
-  var minJerk = options.minJerk || 4;
-
-  var flipSide;
-  var state = 0;
-
-  return function machine(mag, gravity){
-    var gmag = mag - gravity;
-    if(state == 0) {
-      if(gmag > minJerk){
-        state = 1;
-        flipSide = gmag;
-        trigger && trigger(gmag,state);
-      }
-    } else if(flipSide > 0 != gmag > 0) {
-      state++;
-      if (state == states) state = 0;
-      flipSide = gmag;
-      trigger && trigger(gmag,state);
-    }
-    poll && poll(gmag,state);
-  };
-}

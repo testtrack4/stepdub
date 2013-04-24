@@ -50,6 +50,7 @@
     <script type="text/javascript" src="scripts/prep.js"></script>
     <script type="text/javascript" src="scripts/functions.js"></script>
     <script type="text/javascript" src="scripts/charting.js"></script>
+    <script type="text/javascript" src="scripts/shoemakers.js"></script>
     <script>
       /*global stepMachine playSound chartable*/
 
@@ -58,99 +59,37 @@
       var chartp = chartable(document.getElementById("accelgraph"),
         {frameSec: 0, defStyle: 'stroke:gray'});
 
-      var firstState = localStorage.getItem("firstState") === null ? 1 :
-        parseInt(localStorage.getItem("firstState"),10);
-      var secondState = localStorage.getItem("secondState") === null ? 2 :
-        parseInt(localStorage.getItem("secondState"),10);
-
-      function chartSilence(mag,state) {
-        chartp(mag,"stroke: gray");
-      }
-
-      mal.setCb(function(mag,grav){chartp(mag-grav,"stroke: gray");});
-
-      var stateColors = [ "green", "white", "yellow" ];
-      var styleInto = 'stroke:'+stateColors[0];
-      function chartState (mag, state){
-        chartp(mag,styleInto);
-        styleInto = 'stroke:'+stateColors[state];
-      }
-
-      function soundTrigger(soundName) {
-        return function(mag, state){
-          if(state == 1) playSound("sounds/" + soundName + '.mp3');};
-      }
-
-      function doubleSounder(upSound,downSound) {
-        return function(mag, state){
-          if(state == firstState) playSound("sounds/" + upSound + '.mp3');
-          else if(state == secondState) playSound("sounds/" + downSound + '.mp3');};
-      }
-
-      function gallopIterator(folder,count) {
-        var position = 0;
-        return function(mag, state){
-          if(state == firstState || state == secondState) playSound("sounds/" + folder + '/' + position + '.mp3');
-          position = (position + 1) % count;
-        };
-      }
-
-      var sensitivity = 4;
-
-      function intenSound(sounds) {
-        var max = 0;
-        return {
-          poll: function(mag, state){
-            if (state==1) max = Math.max(max,mag);
-            //TODO: chart the intensity of the step for
-            //the duration of state 1
-            chartState(mag,state);
-          },
-          trigger: function(mag, state){
-            if (state==2) {
-              var i = sounds.length;
-              while (max < sensitivity * i) i--;
-              playSound("sounds/" + sounds[i-1] + '.mp3');
-              max = 0;
-            }
-          }
-        }
-      }
+      mal.setCb(chartSilence);
 
       var activeShoe;
-      function addShoe(image,label,trigger,poll){
+      function addShoe(image,label,machine){
         var button = document.createElement("img");
-        var machine = stepMachine(3,trigger,poll);
         button.src = 'shoes/' + image + '.svg';
         button.className = "shoe-button";
-        button.addEventListener("click",function(evt){
+        function activateShoe(evt){
           document.getElementById("active-label").textContent = label;
-          activeShoe.classList.remove('active');
+          if(activeShoe) activeShoe.classList.remove('active');
           activeShoe = button;
           activeShoe.classList.add('active');
           mal.setCb(machine);
-        });
+        }
+        button.addEventListener("click",activateShoe);
         document.getElementById("buttons").appendChild(button);
         return button;
       }
 
-      activeShoe = addShoe("ninja","Ninja Clan Foot Stealth",
-        null,chartSilence);
+      var defaultShoe = addShoe("ninja",
+        "Ninja Clan Foot Stealth", chartSilence);
+      addShoe("spring", "Spring In Your Step", soundTrigger('boing'));
+      addShoe("gargantuan", "Big Boom", soundTrigger('boom'));
+      addShoe("wetsock", "Squish Socks", soundTrigger('splat'));
+      addShoe("steamplatform", "Steam Pumped Up Kicks",
+        doubleSounder('shocks', 'steam'));
+      addShoe("squeaky", "Squeaky Shoes",
+        intenSound(['squeaks/ball', 'squeaks/rat', 'squeaks/horn']);
+      addShoe("coconuts", "Coconut Hooves", gallopIterator('clops', 8));
+      if (!activeShoe) activeShoe = defaultShoe;
       activeShoe.classList.add("active");
-      addShoe("spring","Spring In Your Step",
-        soundTrigger('boing'),chartState);
-      addShoe("gargantuan","Big Boom",
-        soundTrigger('boom'),chartState);;
-      addShoe("wetsock","Squish Socks",
-        soundTrigger('splat'),chartState);
-      addShoe("steamplatform","Steam Pumped Up Kicks",
-        doubleSounder('shocks','steam'),chartState);
-      var squeaker = intenSound([
-        'squeaks/ball','squeaks/rat','squeaks/horn']);
-      addShoe("squeaky","Squeaky Shoes",
-        squeaker.trigger,squeaker.poll);
-      addShoe("coconuts","Coconut Hooves",
-        gallopIterator('clops',8),chartState);
     </script>
   </body>
 </html>
