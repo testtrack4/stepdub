@@ -79,13 +79,13 @@
       function doubleSounder(upSound,downSound) {
         return function(mag, state){
           if(state==1) playSound("sounds/" + upSound + '.mp3');
-          else if(state==2) playSound("sounds/" + downSound + '.mp3');};
+          else if(state==0) playSound("sounds/" + downSound + '.mp3');};
       }
 
-      function doubleIterator(folder,count) {
+      function gallopIterator(folder,count) {
         var position = 0;
         return function(mag, state){
-          if(state==1 || state==2) playSound("sounds/" + folder + '/' + position + '.mp3');
+          if(state==1 || state==0) playSound("sounds/" + folder + '/' + position + '.mp3');
           position = (position + 1) % count;
         };
       }
@@ -145,7 +145,7 @@
       addShoe("squeaky","Squeaky Shoes",
         squeaker.trigger,squeaker.poll);
       addShoe("coconuts","Coconut Hooves",
-        doubleIterator('clops',8),chartState);
+        gallopIterator('clops',8),chartState);
     </script>
   </body>
 </html>
