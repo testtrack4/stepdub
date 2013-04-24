@@ -58,6 +58,11 @@
       var chartp = chartable(document.getElementById("accelgraph"),
         {frameSec: 0, defStyle: 'stroke:gray'});
 
+      var firstState = parseInt(localStorage.getItem("firstState"),10);
+      var secondState = parseInt(localStorage.getItem("secondState"),10);
+      if (firstState === NaN) firstState = 1;
+      if (secondState === NaN) secondState = 2;
+
       function chartSilence(mag,state) {
         chartp(mag,"stroke: gray");
       }
@@ -73,19 +78,19 @@
 
       function soundTrigger(soundName) {
         return function(mag, state){
-          if(state==1) playSound("sounds/" + soundName + '.mp3');};
+          if(state == 1) playSound("sounds/" + soundName + '.mp3');};
       }
 
       function doubleSounder(upSound,downSound) {
         return function(mag, state){
-          if(state==1) playSound("sounds/" + upSound + '.mp3');
-          else if(state==0) playSound("sounds/" + downSound + '.mp3');};
+          if(state == firstState) playSound("sounds/" + upSound + '.mp3');
+          else if(state == secondState) playSound("sounds/" + downSound + '.mp3');};
       }
 
       function gallopIterator(folder,count) {
         var position = 0;
         return function(mag, state){
-          if(state==1 || state==0) playSound("sounds/" + folder + '/' + position + '.mp3');
+          if(state == firstState || state == secondState) playSound("sounds/" + folder + '/' + position + '.mp3');
           position = (position + 1) % count;
         };
       }
