@@ -65,7 +65,7 @@
       var initialShoe = localStorage.getItem("initialShoe");
       function addShoe(image,label,machine){
         var button = document.createElement("img");
-        button.src = 'shoes/' + image + Modernizr.svg ? '.svg' : '.png';
+        button.src = 'shoes/' + image + (Modernizr.svg ? '.svg' : '.png');
         button.className = "shoe-button";
         function activateShoe(evt){
           document.getElementById("active-label").textContent = label;
