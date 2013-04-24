@@ -68,7 +68,7 @@ window.addEventListener('load', function() {
 //fix [still-unreliable PhoneGap external link opening](https://build.phonegap.com/blog/access-tags)
 bean.on(document.body,"click",'a[target="_blank"]', function(e){
   if(navigator.app){
-    navigator.app.loadUrl(e.target.href, { openExternal: true });
+    open(e.target.href, '_system');
     e.stop();
     return false;
   }
