@@ -60,20 +60,16 @@ if(b.defineProperty){var l={get:i,enumerable:true,configurable:true};try{b.defin
 m.svg=function(){return!!b.createElementNS&&!!b.createElementNS(l.svg,"svg").createSVGRect},m.inlinesvg=function(){var a=b.createElement("div");return a.innerHTML="<svg/>",(a.firstChild&&a.firstChild.namespaceURI)==l.svg},m.smil=function(){return!!b.createElementNS&&/SVGAnimate/.test(k.call(b.createElementNS(l.svg,"animate")))};for(var z in m)t(m,z)&&(r=z.toLowerCase(),e[r]=m[z](),p.push((e[r]?"":"no-")+r));return e.addTest=function(a,b){if(typeof a=="object")for(var d in a)t(a,d)&&e.addTest(d,a[d]);
 else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof enableClasses!="undefined"&&enableClasses&&(f.className+=" "+(b?"":"no-")+a),e[a]=b}return e},u(""),h=j=null,e._version=d,e}(this,this.document);
 
-try {
-  //Instantiate FastClick on the body
-  window.addEventListener('load', function() {
-      new FastClick(document.body);
-  }, false);
+//Instantiate FastClick on the body
+window.addEventListener('load', function() {
+  new FastClick(document.body);
+}, false);
 
-  document.addEventListener('deviceready',function(){
-    //fix https://github.com/stuartpb/stepdub/issues/2
-    bean.on(document.body,"click",'a[target="_blank"]', function(e){
-      open(e.target.href, '_system');
-      e.stop();
-      return false;
-    });
+document.addEventListener('deviceready',function(){
+  //fix https://github.com/stuartpb/stepdub/issues/2
+  bean.on(document.body,"click",'a[target="_blank"]', function(e){
+    open(e.target.href, '_system');
+    e.stop();
+    return false;
   });
-} catch(err) {
-  navigator.notification.alert(err.message,null,'Prep error');
-}
+});
