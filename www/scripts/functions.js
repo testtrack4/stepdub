@@ -11,6 +11,12 @@ function reportErr(err) {
   console.log(err);
   navigator.notification.alert(err.message);
 }
+function reportTrace(title){
+  return function reporter(err) {
+    console.log(err,title);
+    navigator.notification.alert(err.message,null,title);
+  };
+}
 
 function getAppLocalBase() {
   var pn = window.location.pathname;
@@ -74,7 +80,7 @@ function magAvgListener(options) {
       if(sleepyFrames <= sleepPeriod){
         navigator.accelerometer.clearWatch(dis.watchID);
         dis.watchID = navigator.accelerometer.watchAcceleration(
-          watcher,reportErr,{frequency: frequency});
+          watcher,reportTrace("Wake error"),{frequency: frequency});
       }
       lastX=acc.x; lastY=acc.y; lastZ=acc.z; sleepyFrames = 0;
     } else {
@@ -82,7 +88,7 @@ function magAvgListener(options) {
       if(sleepyFrames == sleepPeriod){
         navigator.accelerometer.clearWatch(dis.watchID);
         dis.watchID = navigator.accelerometer.watchAcceleration(
-          watcher,reportErr,{frequency: sleepFrequency});
+          watcher,reportTrace("Sleep error"),{frequency: sleepFrequency});
       }
     }
 
@@ -106,7 +112,7 @@ function magAvgListener(options) {
 
   document.addEventListener('deviceready', function(){
     dis.watchID = navigator.accelerometer.watchAcceleration(
-      watcher,reportErr,{frequency: frequency});
+      watcher,reportTrace("Startup error"),{frequency: frequency});
   });
 
   return dis;
