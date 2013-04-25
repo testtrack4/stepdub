@@ -66,13 +66,13 @@ try {
       new FastClick(document.body);
   }, false);
 
-  //fix https://github.com/stuartpb/stepdub/issues/2
-  bean.on(document.body,"click",'a[target="_blank"]', function(e){
-    if(navigator.app){
+  document.addEventListener('deviceready',function(){
+    //fix https://github.com/stuartpb/stepdub/issues/2
+    bean.on(document.body,"click",'a[target="_blank"]', function(e){
       open(e.target.href, '_system');
       e.stop();
       return false;
-    }
+    });
   });
 } catch(err) {
   navigator.notification.alert(err.message,null,'Prep error');
