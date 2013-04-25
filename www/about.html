@@ -59,7 +59,7 @@
       </ul>
     </p>
     <footer>
-      <a href="http://stuartpb.com" id="coda" style="display: inline-block;"><img src="stuhat.svg"></a>
+      <a href="http://stuartpb.com" target="_blank" id="coda" style="display:inline-block"><img src="stuhat.svg"></a>
     </footer>
     <script>
       var buf = '!';
@@ -69,6 +69,7 @@
           if(buf == 'spbdebut'){
             var kapow = document.getElementById('coda');
             kapow.href='secrets/develop.html';
+            kapow.target='_self'
             kapow.style.WebkitTransform = "rotate(180deg)";
             kapow.style.MozTransform = "rotate(180deg)";
             kapow.style.msTransform = "rotate(180deg)";
