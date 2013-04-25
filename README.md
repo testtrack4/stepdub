@@ -1,6 +1,6 @@
 # StepDub
 
-![StepDub](https//raw.github.com/stuartpb/stepdub/master/www/icon.png)
+![StepDub](https://raw.github.com/stuartpb/stepdub/master/www/icon.png)
 
 StepDub is a little PhoneGap app for making sounds while you walk.
 
