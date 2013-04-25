@@ -62,13 +62,14 @@ else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof 
 
 try {
   //Instantiate FastClick on the body
-  window.addEventListener('load', function() {
+  document.addEventListener('load', function() {
       new FastClick(document.body);
   }, false);
 
   document.addEventListener('deviceready',function(){
     //fix https://github.com/stuartpb/stepdub/issues/2
     bean.on(document.body,"click",'a[target="_blank"]', function(e){
+      navigator.notification.alert(err.message,null,'Understood');
       open(e.target.href, '_system');
       e.stop();
       return false;
