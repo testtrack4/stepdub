@@ -1,11 +1,6 @@
-/*global chartp playSound*/
+/*global chartp getParam playSound*/
 
 //// Parameters
-
-function getParam(name, defaultValue){
-  return localStorage.getItem(name) === null ? defaultValue :
-    parseInt(localStorage.getItem(name), 10);
-}
 
 //The minimum magnitude to trigger a sound / begin state oscillation.
 var sensitivity = getParam("bottomThreshold", 4);

@@ -2,6 +2,11 @@
 
 "use strict";
 
+function getParam(name, defaultValue){
+  return localStorage.getItem(name) === null ? defaultValue :
+    parseInt(localStorage.getItem(name), 10);
+}
+
 function reportErr(err) {
   console.log(err);
   navigator.notification.alert(err.message);
@@ -19,7 +24,8 @@ function playSound(filename) {
 }
 
 function magAvgListener(options) {
-  var max = Math.max,
+  var abs = Math.abs,
+      max = Math.max,
       min = Math.min,
       sqrt = Math.sqrt,
       floor = Math.floor;
@@ -29,8 +35,11 @@ function magAvgListener(options) {
   var maglist = [];
   var order = [];
   var frequency = options.frequency || 50;
+  var sleepFrequency = options.sleepFrequency || getParam("sleepInterval", 500);
+  var sleepPeriod = options.sleepPeriod || getParam("sleepPeriod", 300);
   var samples = options.samples || 127;
   var meandian = options.meandian || 5;
+  var sleepiness = options.sleepiness || getParam("sleepThreshold", 1);
 
   //it's almost like a "this" object!
   var dis = {};
@@ -55,7 +64,28 @@ function magAvgListener(options) {
     order = [];
   };
 
+  var lastX = 0;
+  var lastY = 0;
+  var lastZ = 0;
+  var sleepyFrames = 0;
+
   function watcher(acc) {
+    if (abs(lastX-acc.x) + abs(lastY-acc.y) + abs(lastZ-acc.z) > sleepiness){
+      if(sleepyFrames <= sleepPeriod){
+        navigator.accelerometer.clearWatch(dis.watchID);
+        dis.watchID = navigator.accelerometer.watchAcceleration(
+          watcher,reportErr,{frequency: frequency});
+      }
+      lastX=acc.x; lastY=acc.y; lastZ=acc.z; sleepyFrames = 0;
+    } else {
+      sleepyFrames++;
+      if(sleepyFrames == sleepPeriod){
+        navigator.accelerometer.clearWatch(dis.watchID);
+        dis.watchID = navigator.accelerometer.watchAcceleration(
+          watcher,reportErr,{frequency: sleepFrequency});
+      }
+    }
+
     var mag = sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z );
     maglist.push(mag);
     while(maglist.length > samples) maglist.shift();
