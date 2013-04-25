@@ -67,9 +67,6 @@ window.addEventListener('load', function() {
 
 document.addEventListener('deviceready',function(){
   //fix https://github.com/stuartpb/stepdub/issues/2
-  bean.on(document.body,"click",'a[target="_blank"]', function(e){
-    open(e.target.href, '_system');
-    e.stop();
-    return false;
-  });
+  bean.on(document.body, "click", 'a[href^="http://"], a[href^="https://"]',
+    function(e){open(e.target.href, '_system'); return e.stop();});
 });
