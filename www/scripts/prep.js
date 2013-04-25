@@ -65,8 +65,8 @@ window.addEventListener('load', function() {
   new FastClick(document.body);
 }, false);
 
-document.addEventListener('deviceready',function(){
+document.addEventListener('deviceready', function(){
   //fix https://github.com/stuartpb/stepdub/issues/2
   bean.on(document.body, "click", 'a[href^="http://"], a[href^="https://"]',
-    function(e){open(e.target.href, '_system'); return e.stop();});
+    function(e){e.stop(); open(e.target.href, '_system');});
 });
