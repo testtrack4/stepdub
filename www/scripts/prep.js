@@ -65,10 +65,10 @@ window.addEventListener('load', function() {
     new FastClick(document.body);
 }, false);
 
-//fix [still-unreliable PhoneGap external link opening](https://build.phonegap.com/blog/access-tags)
+//fix https://github.com/stuartpb/stepdub/issues/2
 bean.on(document.body,"click",'a[target="_blank"]', function(e){
   if(navigator.app){
-    open(e.target.href, '_system');
+    //open(e.target.href, '_system');
     e.stop();
     return false;
   }
