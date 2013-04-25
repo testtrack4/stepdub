@@ -77,7 +77,7 @@ function magAvgListener(options) {
 
   function watcher(acc) {
     if (abs(lastX-acc.x) + abs(lastY-acc.y) + abs(lastZ-acc.z) > sleepiness){
-      if(sleepyFrames <= sleepPeriod){
+      if(sleepyFrames >= sleepPeriod){
         navigator.accelerometer.clearWatch(dis.watchID);
         dis.watchID = navigator.accelerometer.watchAcceleration(
           watcher,reportTrace("Wake error"),{frequency: frequency});
