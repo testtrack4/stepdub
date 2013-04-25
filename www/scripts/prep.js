@@ -61,9 +61,9 @@ m.svg=function(){return!!b.createElementNS&&!!b.createElementNS(l.svg,"svg").cre
 else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof enableClasses!="undefined"&&enableClasses&&(f.className+=" "+(b?"":"no-")+a),e[a]=b}return e},u(""),h=j=null,e._version=d,e}(this,this.document);
 
 //Instantiate FastClick on the body
-window.addEventListener('load', function() {
+/*window.addEventListener('load', function() {
     new FastClick(document.body);
-}, false);
+}, false);*/
 
 //fix [still-unreliable PhoneGap external link opening](https://build.phonegap.com/blog/access-tags)
 bean.on(document.body,"click",'a[target="_blank"]', function(e){
