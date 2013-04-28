@@ -6,6 +6,8 @@
 var sensitivity = getParam("bottomThreshold", 4);
 //For shoes with variable intensity, the most intense magnitude.
 var topThreshold = getParam("topThreshold", 10);
+//For jumping shoes, the least intense magnitude (freefall).
+var dipThreshold = getParam("dipThreshold", 1);
 //For shoes that play on multiple states:
 //The state to play the first sound on.
 var firstState = getParam("firstState", 1);
@@ -31,9 +33,9 @@ function stepMachine(states, trigger, poll) {
       state++;
       if (state == states) state = 0;
       flipSide = gmag;
-      trigger && trigger(gmag,state);
+      trigger && trigger(gmag,state, gravity);
     }
-    poll && poll(gmag,state);
+    poll && poll(gmag,state,gravity);
   };
 }
 
@@ -92,6 +94,24 @@ function intenSound(sounds) {
     }
   }, function poll(mag, state){
     if (state == 1) max = Math.max(max, mag);
+    //TODO: chart the intensity of the step for
+    //the duration of state 1
+    chartState(mag, state);
+  });
+}
+
+function jumpIntenSound(sounds) {
+  var min = Infinity;
+  return stepMachine(3, function trigger(mag, state, gravity){
+    if (state == 0) {
+      var i = sounds.length - 1;
+      var grade = (dipThreshold - gravity) / sounds.length - 1;
+      while (min > gravity - grade * i) i--;
+      playSound("sounds/" + sounds[Math.max(i,0)] + '.mp3');
+      min = Infinity;
+    }
+  }, function poll(mag, state, gravity){
+    if (state == 2) min = Math.min(min, mag + gravity);
     //TODO: chart the intensity of the step for
     //the duration of state 1
     chartState(mag, state);

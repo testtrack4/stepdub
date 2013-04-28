@@ -53,7 +53,8 @@
     <script type="text/javascript" src="scripts/shoemakers.js"></script>
     <script>
       /*global Modernizr magAvgListener chartable
-        chartSilence soundTrigger doubleSounder intenSound gallopIterator*/
+        chartSilence soundTrigger doubleSounder
+        intenSound jumpIntenSound gallopIterator*/
 
       "use strict";
       var mal = magAvgListener();
@@ -91,7 +92,7 @@
       addShoe("squeaky", "Squeaky Shoes",
         intenSound(['squeaks/ball', 'squeaks/horn']));
       addShoe("coconuts", "Coconut Hooves", gallopIterator('clops', 8));
-      addShoe("beepboot", "Beep Boots", intenSound(['nestep', 'pressa']));
+      addShoe("beepboot", "Beep Boots", jumpIntenSound(['nestep', 'pressa']));
 
       if (!activeShoe) activateDefault();
     </script>
