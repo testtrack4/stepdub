@@ -40,7 +40,7 @@ function magAvgListener(options) {
   var cb = options.cb;
   var maglist = [];
   var order = [];
-  var frequency = options.frequency || 50;
+  var frequency = options.frequency || getParam("wakeInterval", 50);
   var sleepFrequency = options.sleepFrequency || getParam("sleepInterval", 500);
   var sleepPeriod = options.sleepPeriod || getParam("sleepPeriod", 300);
   var samples = options.samples || 127;
