@@ -105,7 +105,7 @@ function jumpIntenSound(sounds) {
   return stepMachine(3, function trigger(mag, state, gravity){
     if (state == 0) {
       var i = sounds.length - 1;
-      var grade = (dipThreshold - gravity) / sounds.length - 1;
+      var grade = (gravity - dipThreshold) / sounds.length - 1;
       while (min > gravity - grade * i) i--;
       playSound("sounds/" + sounds[Math.max(i,0)] + '.mp3');
       min = Infinity;
