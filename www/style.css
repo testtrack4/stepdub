@@ -33,6 +33,10 @@ img {
   vertical-align: middle;
 }
 
+a img {
+  border: none;
+}
+
 header {
   position: relative;
   height: 3em;
@@ -56,6 +60,9 @@ h1 img {
   height: 2rem;
 }
 
+a:link, a:visited {
+  color: blue;
+}
 
 .chart {
   background-color: black;
