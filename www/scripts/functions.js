@@ -2,9 +2,18 @@
 
 "use strict";
 
-function getParam(name, defaultValue){
-  return localStorage.getItem(name) === null ? defaultValue :
-    parseInt(localStorage.getItem(name), 10);
+var paramDefaults = {
+  spikeTrigger: 4, dipTrigger: -4,
+  spikeStrongest: 10, dipStrongest: -9,
+  decayFactor: 0.5,
+  sleepThreshold: 1, sleepPeriod: 300,
+  sleepInterval: 500,
+  wakeInterval: 50
+};
+
+function getParam(name){
+  return localStorage.getItem(name) === null ? paramDefaults[name] :
+    parseFloat(localStorage.getItem(name));
 }
 
 function reportErr(err) {
@@ -40,12 +49,12 @@ function magAvgListener(options) {
   var cb = options.cb;
   var maglist = [];
   var order = [];
-  var frequency = options.frequency || getParam("wakeInterval", 50);
-  var sleepFrequency = options.sleepFrequency || getParam("sleepInterval", 500);
-  var sleepPeriod = options.sleepPeriod || getParam("sleepPeriod", 300);
+  var frequency = options.frequency || getParam("wakeInterval");
+  var sleepFrequency = options.sleepFrequency || getParam("sleepInterval");
+  var sleepPeriod = options.sleepPeriod || getParam("sleepPeriod");
   var samples = options.samples || 127;
   var meandian = options.meandian || 5;
-  var sleepiness = options.sleepiness || getParam("sleepThreshold", 1);
+  var sleepiness = options.sleepiness || getParam("sleepThreshold");
 
   //it's almost like a "this" object!
   var dis = {};

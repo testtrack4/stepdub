@@ -3,16 +3,16 @@
 //// Parameters
 
 //The minimum magnitude to trigger a sound / begin state oscillation.
-var sensitivity = getParam("bottomThreshold", 4);
+var sensitivity = getParam("spikeTrigger");
 //For shoes with variable intensity, the most intense magnitude.
-var topThreshold = getParam("topThreshold", 10);
+var topThreshold = getParam("spikeStrongest");
 //For jumping shoes, the least intense magnitude (freefall).
-var dipThreshold = getParam("dipThreshold", -9);
+var dipThreshold = getParam("dipStrongest");
 //For shoes that play on multiple states:
 //The state to play the first sound on.
-var firstState = getParam("firstState", 1);
+var firstState = 1;
 //The state to play the second sound on.
-var secondState = getParam("secondState", 2);
+var secondState = 2;
 
 //// State machine constructor
 
