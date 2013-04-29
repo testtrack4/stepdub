@@ -79,7 +79,7 @@ function doubleSounder(upSound, downSound) {
     playSound("sounds/" + upSound + '.mp3');
     chartWhite(mag);
   }, chartTweener, function stop(mag) {
-    playSound("sounds/" + upSound + '.mp3');
+    playSound("sounds/" + downSound + '.mp3');
     chartYellow(mag);
   }, chartGreen);
 
