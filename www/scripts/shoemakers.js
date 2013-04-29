@@ -31,7 +31,7 @@ function stepMachine(start, between, stop, outside, invert) {
         cb = stop;
       }
     } else {
-      if(invert ? gmag < dipTrigger : gmag > spikeTrigger){
+      if(invert ? gmag < dipTrigger : gmag > spikeTrigger) {
         active = true;
         cb = start;
       } else {
@@ -102,17 +102,17 @@ function gallopIterator(folder, count) {
 
 function intenSound(sounds, invert) {
   var max;
-  return stepMachine(function start(mag){
+  return stepMachine(function start(mag) {
     max = mag;
     chartWhite(mag);
-  }, function between(mag){
+  }, function between(mag) {
     max = (invert ? Math.min : Math.max)(max, mag);
     //TODO: use different colors tochart the intensity of the step
     chartTweener(mag);
   }, function stop(mag) {
     var i = sounds.length - 1;
     var grade = (invert ? dipStrongest - dipTrigger 
-      : spikeStrongest - spikeTrigger) / sounds.length - 1;
+      : spikeStrongest - spikeTrigger) / (sounds.length - 1);
     while (invert ? max > dipTrigger + grade * i
       : max < spikeTrigger + grade * i) i--;
     playSound("sounds/" + sounds[i] + '.mp3');
