@@ -4,8 +4,8 @@
 
 var paramDefaults = {
   spikeTrigger: 4, dipTrigger: -4,
-  spikeStrongest: 10, dipStrongest: -9,
-  decayFactor: 0.5,
+  spikeStrongest: 10, dipStrongest: -7,
+  decayFactor: 0.25,
   sleepThreshold: 1, sleepPeriod: 300,
   sleepInterval: 500,
   wakeInterval: 50
