@@ -2,40 +2,43 @@
 
 //// Parameters
 
-//The minimum magnitude to trigger a sound / begin state oscillation.
-var sensitivity = getParam("spikeTrigger");
+var decayFactor = getParam("decayFactor");
+//The minimum magnitude to trigger a sound / begin a spike.
+var spikeTrigger = getParam("spikeTrigger");
 //For shoes with variable intensity, the most intense magnitude.
-var topThreshold = getParam("spikeStrongest");
+var spikeStrongest = getParam("spikeStrongest");
+//The minimum magnitude to trigger a sound / begin a dip.
+var dipTrigger = getParam("dipTrigger");
 //For jumping shoes, the least intense magnitude (freefall).
-var dipThreshold = getParam("dipStrongest");
-//For shoes that play on multiple states:
-//The state to play the first sound on.
-var firstState = 1;
-//The state to play the second sound on.
-var secondState = 2;
+var dipStrongest = getParam("dipStrongest");
+
+var spikeUntrigger = spikeTrigger * decayFactor;
+var dipUntrigger = dipTrigger * decayFactor;
 
 //// State machine constructor
 
-function stepMachine(states, trigger, poll) {
-
-  var flipSide;
-  var state = 0;
-
-  return function machine(mag, gravity){
-    var gmag = mag - gravity;
-    if(state == 0) {
-      if(gmag > sensitivity){
-        state = 1;
-        flipSide = gmag;
-        trigger && trigger(gmag, state);
+function stepMachine(start, between, stop, outside, invert) {
+  var active = false;
+  
+  return function machine(mag,grav){
+    var gmag = mag - grav;
+    var cb;
+    if(active){
+      if(invert ? gmag < dipUntrigger : gmag > spikeUntrigger) {
+        cb = between;
+      } else {
+        active = false;
+        cb = stop;
       }
-    } else if(flipSide > 0 != gmag > 0) {
-      state++;
-      if (state == states) state = 0;
-      flipSide = gmag;
-      trigger && trigger(gmag, state);
+    } else {
+      if(invert ? gmag < dipTrigger : gmag > spikeTrigger){
+        active = true;
+        cb = start;
+      } else {
+        cb = outside;
+      }
     }
-    poll && poll(gmag, state);
+    if (cb) cb(gmag,grav);
   };
 }
 
@@ -44,11 +47,12 @@ function stepMachine(states, trigger, poll) {
 //These all assume "chartp" has been defined outside of this
 //context. That is the mechanism I'm choosing for the graph.
 
-var stateColors = [ "green", "white", "yellow" ];
-var styleInto = 'stroke:' + stateColors[0];
-function chartState (mag, state){
-  chartp(mag, styleInto);
-  styleInto = 'stroke:' + stateColors[state];
+var brush;
+function chartAs(color) {
+  return function (mag) {
+    chartp(mag, brush || color);
+    brush = 'stroke:' + color;
+  };
 }
 
 //Technically this isn't a shoemaker but it is the machine for ninjas
@@ -58,62 +62,59 @@ function chartSilence(mag, grav) {
 
 //// Machine constructors
 
+var chartWhite = chartAs('white');
+var chartTweener = chartAs('#ff8');
+var chartYellow = chartAs('yellow');
+var chartGreen = chartAs('green');
+
 function soundTrigger(soundName) {
-  return stepMachine(3, function trigger(mag, state){
-    if(state == 1) playSound("sounds/" + soundName + '.mp3');
-  }, chartState);
+  return stepMachine(function start(mag) {
+    playSound("sounds/" + soundName + '.mp3');
+    chartWhite(mag);
+  }, chartTweener, chartYellow, chartGreen);
 }
 
 function doubleSounder(upSound, downSound) {
-  return stepMachine(3, function trigger(mag, state){
-    if(state == firstState)
-      playSound("sounds/" + upSound + '.mp3');
-    else if(state == secondState)
-      playSound("sounds/" + downSound + '.mp3');
-  }, chartState);
+  return stepMachine(function start(mag) {
+    playSound("sounds/" + upSound + '.mp3');
+    chartWhite(mag);
+  }, chartTweener, function stop(mag) {
+    playSound("sounds/" + upSound + '.mp3');
+    chartYellow(mag);
+  }, chartGreen);
+
 }
 
 function gallopIterator(folder, count) {
   var position = 0;
-  return stepMachine(3, function trigger(mag, state){
-    if(state == firstState || state == secondState)
+  
+  function playNext(chartFunction) {
+    return function(mag) {
       playSound("sounds/" + folder + '/' + position + '.mp3');
-    position = (position + 1) % count;
-  }, chartState);
+      position = (position + 1) % count;
+      chartFunction(mag);
+    };
+  }
+  
+  return stepMachine(playNext(chartWhite), chartTweener,
+    playNext(chartYellow), chartGreen);
 }
 
-function intenSound(sounds) {
-  var max = 0;
-  return stepMachine(3, function trigger(mag, state){
-    if (state == 2) {
-      var i = sounds.length - 1;
-      var grade = (topThreshold - sensitivity) / sounds.length - 1;
-      while (max < sensitivity + grade * i) i--;
-      playSound("sounds/" + sounds[i] + '.mp3');
-      max = 0;
-    }
-  }, function poll(mag, state){
-    if (state == 1) max = Math.max(max, mag);
-    //TODO: chart the intensity of the step for
-    //the duration of state 1
-    chartState(mag, state);
-  });
-}
-
-function jumpIntenSound(sounds) {
-  var min = Infinity;
-  return stepMachine(3, function trigger(mag, state){
-    if (state == 0) {
-      var i = sounds.length - 1;
-      var grade = dipThreshold / sounds.length - 1;
-      while (min > grade * i) i--;
-      playSound("sounds/" + sounds[i] + '.mp3');
-      min = Infinity;
-    }
-  }, function poll(mag, state){
-    if (state == 2) min = Math.min(min, mag);
-    //TODO: chart the intensity of the step for
-    //the duration of state 1
-    chartState(mag, state);
-  });
+function intenSound(sounds, invert) {
+  var max;
+  return stepMachine(function start(mag){
+    max = mag;
+    chartWhite(mag);
+  }, function between(mag){
+    max = (invert ? Math.min : Math.max)(max, mag);
+    //TODO: use different colors tochart the intensity of the step
+    chartTweener(mag);
+  }, function stop(mag) {
+    var i = sounds.length - 1;
+    var grade = (invert ? dipStrongest - dipTrigger 
+      : spikeStrongest - spikeTrigger) / sounds.length - 1;
+    while (invert ? max > dipTrigger + grade * i
+      : max < spikeTrigger + grade * i) i--;
+    playSound("sounds/" + sounds[i] + '.mp3');
+  }, chartGreen, invert);
 }

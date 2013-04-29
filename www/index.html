@@ -92,7 +92,8 @@
       addShoe("squeaky", "Squeaky Shoes",
         intenSound(['squeaks/ball', 'squeaks/horn']));
       addShoe("coconuts", "Coconut Hooves", gallopIterator('clops', 8));
-      addShoe("beepboot", "Beep Boots", jumpIntenSound(['nestep', 'pressa']));
+      addShoe("beepboot", "Beep Boots",
+        intenSound(['nestep', 'pressa'], true));
 
       if (!activeShoe) activateDefault();
     </script>
