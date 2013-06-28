@@ -12,6 +12,9 @@
       body {
         margin: 1em;
       }
+      .hatblock {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -25,6 +28,13 @@
       <span onclick="code('b')">b</span>
     </h1>
     <h2>About</h2>
+    <p>&copy; 2013 Stuart P. Bentley <a href="mailto:stuart@testtrack4.com">&lt;stuart@testtrack4.com&gt;</a></p>
+    <div class='hatblock'>
+      <a href="http://stuartpb.com" id="coda" style="display:inline-block"><img src="stuhat.svg"></a>
+    </div>
+    <p>StepDub is built entirely with HTML5 technologies using the PhoneGap Build service.
+      The source code to StepDub is freely available at
+      <a href="https://github.com/stuartpb/stepdub">https://github.com/stuartpb/stepdub</a>.</p>
     <p>StepDub proudly incorporates several free cultural works:</p>
     <p>Sounds from <a href="http://freesound.org">Freesound</a>:
       <ul>
@@ -54,9 +64,6 @@
         <li><a href="http://openclipart.org/detail/8879/rubber-duck-by-gerald_g-8879">Rubber Duck by Gerald_G</a></li>
       </ul>
     </p>
-    <footer>
-      <a href="http://stuartpb.com" id="coda" style="display:inline-block"><img src="stuhat.svg"></a>
-    </footer>
     <script>
       var buf = '!';
       function code(char) {
