@@ -43,10 +43,21 @@ header {
 }
 
 footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
+  background-color: green;
+  color: white;
 }
 
-h1, h2 {
+footer a:link, footer a:visited {
+  font-family: Racing Sans One;
+  color: white;
+}
+
+h1, h2, h3 {
   font-family: Racing Sans One;
   margin: 0;
 }
@@ -87,6 +98,10 @@ header h1 {
 }
 
 h2 {
+  font-size: 1.5em;
+}
+
+h3 {
   font-size: 1em;
 }
 
@@ -96,6 +111,7 @@ h2 {
   text-align: center;
   background-color: #0b0;
   color: white;
+  font-size: 1em;
 }
 
 input {
