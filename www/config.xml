@@ -45,10 +45,21 @@
     <preference name="android-minSdkVersion"      value="12" />             <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
 
-    <!-- Plugins can also be added here. -->
+    <!-- Plugins -->
+
+    <!-- Core plugins -->
+    <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="org.apache.cordova.device-motion" />
+    <gap:plugin name="org.apache.cordova.device-orientation" />
+    <gap:plugin name="org.apache.cordova.media" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:plugin name="org.apache.cordova.vibration" />
+
+    <!-- Third party plugins -->
+    <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
     <!--
-        <gap:plugin name="Example" />
-        A list of available plugins are available at https://build.phonegap.com/docs/plugins
+        <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
 
     <!-- Define app icon for each platform. -->
