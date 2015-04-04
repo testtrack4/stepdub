@@ -42,7 +42,6 @@
     <preference name="exit-on-suspend"            value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
     <preference name="show-splash-screen-spinner" value="true" />           <!-- ios: if set to false, the spinner won't appear on the splash screen during app loading -->
     <preference name="auto-hide-splash-screen"    value="true" />           <!-- ios: if set to false, the splash screen must be hidden using a JavaScript API -->
-    <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
     <preference name="android-minSdkVersion"      value="12" />             <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
 
@@ -54,8 +53,6 @@
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
-    <!-- Blackberry are chumps who can't handle icons larger than 16k -->
-    <icon src="icon_small.png" gap:platform="blackberry" />
 
     <!-- Define app splash screen for each platform. -->
     <gap:splash src="splash.png" />
